@@ -60,7 +60,7 @@
       },
       {
         "id": "scenario",
-        "name": "Scenario (True/False)"
+        "name": "Scenario"
       }
     ]
   },

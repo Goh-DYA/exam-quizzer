@@ -5,7 +5,7 @@ Multi-select quizzes for ML4T (Machine Learning for Trading) exam preparation.
 ## Features
 
 - **141 questions** across 12 topics covering the full ML4T syllabus
-- **Two question types** — Multi-select (117) and Scenario-based True/False (24)
+- **Two question types** — Multi-select (117) and Scenario-based (24)
 - **Quiz modes** — All Topics, Random 20, Random 40, or filter By Topic
 - **Question type filter** — All Types, Multi-Select only, or Scenarios only
 - **Instant feedback** — per-option color coding (correct / incorrect / missed) with explanations
