@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ML4T Exam Quizzer</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Screen 1: Home / Quiz Configuration -->
+  <section id="home-screen" class="screen active">
+    <div class="container">
+      <header class="app-header">
+        <h1>ML4T Exam Quizzer</h1>
+        <p class="subtitle">Machine Learning for Trading — Exam Prep</p>
+      </header>
+
+      <div class="card">
+        <h2>Quiz Mode</h2>
+        <div class="radio-group">
+          <label class="radio-option">
+            <input type="radio" name="quiz-mode" value="all" checked>
+            <span class="radio-label">All Questions</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="quiz-mode" value="random20">
+            <span class="radio-label">Random 20</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="quiz-mode" value="random40">
+            <span class="radio-label">Random 40</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="quiz-mode" value="byTopic">
+            <span class="radio-label">By Topic</span>
+          </label>
+        </div>
+      </div>
+
+      <div id="topic-selector" class="card hidden">
+        <h2>Select Topics</h2>
+        <div id="topic-checkboxes" class="checkbox-group">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <div class="card">
+        <label class="checkbox-option">
+          <input type="checkbox" id="shuffle-toggle" checked>
+          <span class="checkbox-label">Shuffle question order</span>
+        </label>
+      </div>
+
+      <button id="start-quiz-btn" class="btn btn-primary">Start Quiz</button>
+    </div>
+  </section>
+
+  <!-- Screen 2: Quiz -->
+  <section id="quiz-screen" class="screen">
+    <div class="container">
+      <div class="quiz-header">
+        <div class="quiz-progress-info">
+          <span id="question-counter">Question 1 of 20</span>
+          <span id="topic-label" class="topic-badge"></span>
+        </div>
+        <div class="progress-bar">
+          <div id="progress-fill" class="progress-fill"></div>
+        </div>
+      </div>
+
+      <div class="card question-card">
+        <p id="question-text" class="question-text"></p>
+        <p class="select-hint">Select all that apply.</p>
+        <div id="options-container" class="options-list">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <div id="feedback-section" class="card feedback-section hidden">
+        <div id="feedback-result" class="feedback-result"></div>
+        <div id="explanation-text" class="explanation-text"></div>
+      </div>
+
+      <div class="quiz-nav">
+        <button id="prev-btn" class="btn btn-secondary" disabled>Prev</button>
+        <button id="submit-btn" class="btn btn-primary">Submit</button>
+        <button id="next-btn" class="btn btn-primary hidden">Next</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Screen 3: Results -->
+  <section id="results-screen" class="screen">
+    <div class="container">
+      <header class="results-header">
+        <h1>Quiz Complete!</h1>
+        <div id="overall-score" class="score-display"></div>
+      </header>
+
+      <div class="card">
+        <h2>Score by Topic</h2>
+        <div id="topic-scores" class="topic-scores-list">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <div class="results-actions">
+        <button id="review-btn" class="btn btn-secondary">Review Answers</button>
+        <button id="new-quiz-btn" class="btn btn-primary">New Quiz</button>
+      </div>
+    </div>
+  </section>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
