@@ -1,7 +1,7 @@
 {
-  "version": "1.0",
+  "version": "1.1",
   "metadata": {
-    "totalQuestions": 117,
+    "totalQuestions": 141,
     "lastUpdated": "2026-03-01",
     "topics": [
       {
@@ -52,6 +52,16 @@
         "id": "projects",
         "name": "Projects (Martingale, Learners)"
       }
+    ],
+    "questionTypes": [
+      {
+        "id": "multi-select",
+        "name": "Multi-Select"
+      },
+      {
+        "id": "scenario",
+        "name": "Scenario (True/False)"
+      }
     ]
   },
   "questions": [
@@ -87,7 +97,8 @@
         "c",
         "d"
       ],
-      "explanation": "Adjusted Close retroactively modifies historical prices to account for stock splits and dividend payments, making it the correct price for backtesting. The raw Close is the actual last traded price. Adjusted Close is typically lower than or equal to Close (not higher), because dividends and forward splits reduce the adjusted historical price."
+      "explanation": "Adjusted Close retroactively modifies historical prices to account for stock splits and dividend payments, making it the correct price for backtesting. The raw Close is the actual last traded price. Adjusted Close is typically lower than or equal to Close (not higher), because dividends and forward splits reduce the adjusted historical price.",
+      "type": "multi-select"
     },
     {
       "id": 2,
@@ -120,7 +131,8 @@
         "a",
         "c"
       ],
-      "explanation": "SPY is the date reference. Forward fill before backward fill prevents lookahead bias. Daily returns = price[t]/price[t-1] - 1 (ratio, NOT subtraction). Normalize by first day, not last. Inner join discards valid days."
+      "explanation": "SPY is the date reference. Forward fill before backward fill prevents lookahead bias. Daily returns = price[t]/price[t-1] - 1 (ratio, NOT subtraction). Normalize by first day, not last. Inner join discards valid days.",
+      "type": "multi-select"
     },
     {
       "id": 3,
@@ -154,7 +166,8 @@
         "b",
         "d"
       ],
-      "explanation": "Forward fill propagates the last known value forward (NOT future data — that's backward fill). Gaps in the middle should be forward filled. Gaps at the beginning (where no prior data exists) must be backward filled as a last resort. A stock that started trading after the date range start will naturally have NaN at the beginning. Interpolation is not always preferred — forward fill is standard practice for financial time series."
+      "explanation": "Forward fill propagates the last known value forward (NOT future data — that's backward fill). Gaps in the middle should be forward filled. Gaps at the beginning (where no prior data exists) must be backward filled as a last resort. A stock that started trading after the date range start will naturally have NaN at the beginning. Interpolation is not always preferred — forward fill is standard practice for financial time series.",
+      "type": "multi-select"
     },
     {
       "id": 4,
@@ -188,7 +201,8 @@
         "b",
         "e"
       ],
-      "explanation": "NumPy speed from C/Fortran. Vectorized ops faster than loops. np.random.random() is uniform [0,1), not normal. NumPy DOES support slicing (core feature). Boolean masking is fundamental."
+      "explanation": "NumPy speed from C/Fortran. Vectorized ops faster than loops. np.random.random() is uniform [0,1), not normal. NumPy DOES support slicing (core feature). Boolean masking is fundamental.",
+      "type": "multi-select"
     },
     {
       "id": 5,
@@ -222,7 +236,8 @@
         "c",
         "d"
       ],
-      "explanation": "Higher kurtosis means fatter tails (more extreme returns than expected under normality). Positive mean daily return indicates general price appreciation. Standard deviation of returns measures volatility. The slope of a return scatter plot vs. market represents BETA, not alpha (alpha is the y-intercept). A correlation near 0 means NO linear relationship, not co-movement."
+      "explanation": "Higher kurtosis means fatter tails (more extreme returns than expected under normality). Positive mean daily return indicates general price appreciation. Standard deviation of returns measures volatility. The slope of a return scatter plot vs. market represents BETA, not alpha (alpha is the y-intercept). A correlation near 0 means NO linear relationship, not co-movement.",
+      "type": "multi-select"
     },
     {
       "id": 6,
@@ -248,14 +263,15 @@
         },
         {
           "id": "e",
-          "text": "A rolling mean always leads (predicts) the actual price movement"
+          "text": "A larger rolling window reacts faster to price changes than a smaller window"
         }
       ],
       "correctAnswers": [
         "a",
         "b"
       ],
-      "explanation": "20-day rolling mean: average of 20 most recent values. Rolling mean LAGS (not leads) price. Bollinger Bands use rolling std. Cannot compute for first 19 days with window of 20."
+      "explanation": "20-day rolling mean: average of 20 most recent values. Rolling mean LAGS (not leads) price. Bollinger Bands use rolling std. Cannot compute for first 19 days with window of 20.",
+      "type": "multi-select"
     },
     {
       "id": 7,
@@ -289,7 +305,8 @@
         "c",
         "d"
       ],
-      "explanation": "Daily return = price[t]/price[t-1] - 1. The first day's return is NaN (not 0) because there's no previous price. Cumulative return = product of (1 + daily_returns) - 1, not the sum. Daily returns are already in percentage terms and can be compared directly across stocks. The sum of daily returns only approximates cumulative return for small returns — the true formula uses multiplicative compounding."
+      "explanation": "Daily return = price[t]/price[t-1] - 1. The first day's return is NaN (not 0) because there's no previous price. Cumulative return = product of (1 + daily_returns) - 1, not the sum. Daily returns are already in percentage terms and can be compared directly across stocks. The sum of daily returns only approximates cumulative return for small returns — the true formula uses multiplicative compounding.",
+      "type": "multi-select"
     },
     {
       "id": 8,
@@ -307,7 +324,7 @@
         },
         {
           "id": "c",
-          "text": "Market Capitalization"
+          "text": "Earnings Per Share (EPS)"
         },
         {
           "id": "d",
@@ -321,7 +338,8 @@
       "correctAnswers": [
         "a"
       ],
-      "explanation": "Standard stock CSV files contain Date, Open, High, Low, Close, Volume, and Adjusted Close (OHLCV + Adj Close). Market Cap, P/E Ratio, and Bid/Ask are not part of standard daily historical CSV data."
+      "explanation": "Standard stock CSV files contain Date, Open, High, Low, Close, Volume, and Adjusted Close (OHLCV + Adj Close). Market Cap, EPS, P/E Ratio, and Bid/Ask are not part of standard daily historical CSV data.",
+      "type": "multi-select"
     },
     {
       "id": 9,
@@ -355,7 +373,8 @@
         "b",
         "c"
       ],
-      "explanation": "Sharpe = (Rp-Rf)/sigma_p. Annualize daily with sqrt(252). Higher Sharpe = better risk-adjusted returns. Rf represents the RISK-FREE RATE (T-bills), NOT average market return."
+      "explanation": "Sharpe = (Rp-Rf)/sigma_p. Annualize daily with sqrt(252). Higher Sharpe = better risk-adjusted returns. Rf represents the RISK-FREE RATE (T-bills), NOT average market return.",
+      "type": "multi-select"
     },
     {
       "id": 10,
@@ -388,7 +407,8 @@
         "a",
         "d"
       ],
-      "explanation": "Correct sequence: normalize to 1.0, multiply by allocations, multiply by start value, sum. Don't subtract Rf from prices. Don't divide by number of stocks."
+      "explanation": "Correct sequence: normalize to 1.0, multiply by allocations, multiply by start value, sum. Don't subtract Rf from prices. Don't divide by number of stocks.",
+      "type": "multi-select"
     },
     {
       "id": 11,
@@ -422,7 +442,8 @@
         "b",
         "c"
       ],
-      "explanation": "Maximize Sharpe, weights in [0,1], sum to 1.0, negate for minimizer. Initial guesses DO matter - optimizers can get stuck in local minima. Global optimum NOT guaranteed."
+      "explanation": "Maximize Sharpe, weights in [0,1], sum to 1.0, negate for minimizer. Initial guesses DO matter - optimizers can get stuck in local minima. Global optimum NOT guaranteed.",
+      "type": "multi-select"
     },
     {
       "id": 12,
@@ -456,7 +477,8 @@
         "b",
         "c"
       ],
-      "explanation": "Cumulative return, average daily return, volatility are standard stats. Maximum drawdown is the largest peak-to-trough PERCENTAGE DECLINE (not count of negative days). Beta measures market sensitivity."
+      "explanation": "Cumulative return, average daily return, volatility are standard stats. Maximum drawdown is the largest peak-to-trough PERCENTAGE DECLINE (not count of negative days). Beta measures market sensitivity.",
+      "type": "multi-select"
     },
     {
       "id": 13,
@@ -491,7 +513,8 @@
         "c",
         "e"
       ],
-      "explanation": "scipy.optimize.minimize takes an objective function, initial guess, bounds, and constraints to find minima. Parameterized models have coefficients to be learned by fitting to data. Polynomial fitting minimizes sum of squared errors. However, optimizers are NOT guaranteed to find global minima — they can get stuck in local minima, especially for non-convex functions. Bounds and constraints help limit the search space."
+      "explanation": "scipy.optimize.minimize takes an objective function, initial guess, bounds, and constraints to find minima. Parameterized models have coefficients to be learned by fitting to data. Polynomial fitting minimizes sum of squared errors. However, optimizers are NOT guaranteed to find global minima — they can get stuck in local minima, especially for non-convex functions. Bounds and constraints help limit the search space.",
+      "type": "multi-select"
     },
     {
       "id": 14,
@@ -524,7 +547,8 @@
         "a",
         "d"
       ],
-      "explanation": "Diversification reduces idiosyncratic risk (not systematic). Portfolio volatility can be LOWER than any individual stock (not equal to average). Prefers low/negative correlations. Two stocks are insufficient."
+      "explanation": "Diversification reduces idiosyncratic risk (not systematic). Portfolio volatility can be LOWER than any individual stock (not equal to average). Prefers low/negative correlations. Two stocks are insufficient.",
+      "type": "multi-select"
     },
     {
       "id": 15,
@@ -559,7 +583,8 @@
         "c",
         "d"
       ],
-      "explanation": "Daily Rf ≈ annual Rf / 252. Excess returns = portfolio returns - Rf. The denominator is std(excess returns). Annualized Sharpe > 1.0 is considered excellent. The Sharpe Ratio IS affected by data frequency — daily data needs annualization by √252, monthly by √12, etc. The raw daily Sharpe will differ from the raw monthly Sharpe."
+      "explanation": "Daily Rf ≈ annual Rf / 252. Excess returns = portfolio returns - Rf. The denominator is std(excess returns). Annualized Sharpe > 1.0 is considered excellent. The Sharpe Ratio IS affected by data frequency — daily data needs annualization by √252, monthly by √12, etc. The raw daily Sharpe will differ from the raw monthly Sharpe.",
+      "type": "multi-select"
     },
     {
       "id": 16,
@@ -593,7 +618,8 @@
         "b",
         "d"
       ],
-      "explanation": "Long-only constraints: weights in [0, 1], sum to 1.0, and no negative weights (no short selling). There is no universal rule requiring minimum 0.1 weight or 10 stocks — these are not standard long-only constraints. An optimizer may allocate 0% to some stocks if that maximizes the objective."
+      "explanation": "Long-only constraints: weights in [0, 1], sum to 1.0, and no negative weights (no short selling). There is no universal rule requiring minimum 0.1 weight or 10 stocks — these are not standard long-only constraints. An optimizer may allocate 0% to some stocks if that maximizes the objective.",
+      "type": "multi-select"
     },
     {
       "id": 17,
@@ -628,7 +654,8 @@
         "d",
         "e"
       ],
-      "explanation": "Daily excess return = 0.05% - 0.01% = 0.04%. Daily Sharpe = 0.04/1.2 ≈ 0.033. Annualized = 0.033 × √252 ≈ 0.53 (multiply by the SQUARE ROOT of 252, not 252 itself). A negative Sharpe means returns are below the risk-free rate."
+      "explanation": "Daily excess return = 0.05% - 0.01% = 0.04%. Daily Sharpe = 0.04/1.2 ≈ 0.033. Annualized = 0.033 × √252 ≈ 0.53 (multiply by the SQUARE ROOT of 252, not 252 itself). A negative Sharpe means returns are below the risk-free rate.",
+      "type": "multi-select"
     },
     {
       "id": 18,
@@ -662,7 +689,8 @@
         "b",
         "c"
       ],
-      "explanation": "Market makers provide liquidity, profit from spreads, face inventory risk. They don't speculate on direction. Known as SPECIALISTS or DEALERS (not index fund managers)."
+      "explanation": "Market makers provide liquidity, profit from spreads, face inventory risk. They don't speculate on direction. Known as SPECIALISTS or DEALERS (not index fund managers).",
+      "type": "multi-select"
     },
     {
       "id": 19,
@@ -696,7 +724,8 @@
         "b",
         "d"
       ],
-      "explanation": "Bid is the highest buy price; ask is the lowest sell price. The spread compensates for adverse selection risk (informed traders). WIDER spreads indicate LOWER liquidity, not higher. When you sell with a market order, you receive the BID price (not ask) — you are selling to the highest bidder."
+      "explanation": "Bid is the highest buy price; ask is the lowest sell price. The spread compensates for adverse selection risk (informed traders). WIDER spreads indicate LOWER liquidity, not higher. When you sell with a market order, you receive the BID price (not ask) — you are selling to the highest bidder.",
+      "type": "multi-select"
     },
     {
       "id": 20,
@@ -729,7 +758,8 @@
         "a",
         "b"
       ],
-      "explanation": "Investors submit through brokers; market makers facilitate. Brokers and market makers are DIFFERENT roles. The chain has THREE participants (investor, broker, market maker), not four."
+      "explanation": "Investors submit through brokers; market makers facilitate. Brokers and market makers are DIFFERENT roles. The chain has THREE participants (investor, broker, market maker), not four.",
+      "type": "multi-select"
     },
     {
       "id": 21,
@@ -763,7 +793,8 @@
         "b",
         "c"
       ],
-      "explanation": "Adverse selection: informed traders exploit market makers. Wider spreads defend against informed traders. HIGHER (not lower) adverse selection = wider spreads. Occurs in all markets."
+      "explanation": "Adverse selection: informed traders exploit market makers. Wider spreads defend against informed traders. HIGHER (not lower) adverse selection = wider spreads. Occurs in all markets.",
+      "type": "multi-select"
     },
     {
       "id": 22,
@@ -798,7 +829,8 @@
         "d",
         "e"
       ],
-      "explanation": "Market orders guarantee execution at the best available price. Limit orders specify a price constraint but may not execute. Market orders consume liquidity from the order book (filled against existing limit orders). Limit orders ADD liquidity. A limit buy order is placed AT or BELOW the current price (not above) — you're saying 'I'll buy only if the price drops to my limit.'"
+      "explanation": "Market orders guarantee execution at the best available price. Limit orders specify a price constraint but may not execute. Market orders consume liquidity from the order book (filled against existing limit orders). Limit orders ADD liquidity. A limit buy order is placed AT or BELOW the current price (not above) — you're saying 'I'll buy only if the price drops to my limit.'",
+      "type": "multi-select"
     },
     {
       "id": 23,
@@ -833,7 +865,8 @@
         "c",
         "d"
       ],
-      "explanation": "A stock has two prices (bid and ask). Stop-loss orders trigger as market orders at a threshold. The top of the book shows the best (highest) bid and best (lowest) ask. Dark pools are private exchanges for large block trades. Not all trades are visible pre-execution — dark pools exist specifically to hide large orders, and even on exchanges, hidden order types exist."
+      "explanation": "A stock has two prices (bid and ask). Stop-loss orders trigger as market orders at a threshold. The top of the book shows the best (highest) bid and best (lowest) ask. Dark pools are private exchanges for large block trades. Not all trades are visible pre-execution — dark pools exist specifically to hide large orders, and even on exchanges, hidden order types exist.",
+      "type": "multi-select"
     },
     {
       "id": 24,
@@ -868,7 +901,8 @@
         "c",
         "e"
       ],
-      "explanation": "Bid-ask spreads are affected by trading volume (more volume = tighter), volatility (more volatility = wider), adverse selection risk, and time of day (spreads often widen at open/close due to uncertainty). The ticker symbol color is irrelevant."
+      "explanation": "Bid-ask spreads are affected by trading volume (more volume = tighter), volatility (more volatility = wider), adverse selection risk, and time of day (spreads often widen at open/close due to uncertainty). The ticker symbol color is irrelevant.",
+      "type": "multi-select"
     },
     {
       "id": 25,
@@ -903,7 +937,8 @@
         "d",
         "e"
       ],
-      "explanation": "Liquidity sourcing is about finding counterparties for large trades without excessive price impact. Breaking orders into smaller pieces (slicing) and using dark pools help reduce impact. Market impact measures how the trade moves the price adversely. Statistical algorithms CANNOT fully solve liquidity sourcing — traders note this remains their top challenge that algorithms alone cannot address."
+      "explanation": "Liquidity sourcing is about finding counterparties for large trades without excessive price impact. Breaking orders into smaller pieces (slicing) and using dark pools help reduce impact. Market impact measures how the trade moves the price adversely. Statistical algorithms CANNOT fully solve liquidity sourcing — traders note this remains their top challenge that algorithms alone cannot address.",
+      "type": "multi-select"
     },
     {
       "id": 26,
@@ -938,7 +973,8 @@
         "d",
         "e"
       ],
-      "explanation": "Buy-side includes hedge funds, pensions, asset managers who buy investments. Sell-side includes banks and broker-dealers who provide services. Buy-side firms LAG behind (not ahead of) the sell-side in ML adoption, with only 22-28% adoption rates. Both sides use trading algorithms, and sell-side provides research and execution services."
+      "explanation": "Buy-side includes hedge funds, pensions, asset managers who buy investments. Sell-side includes banks and broker-dealers who provide services. Buy-side firms LAG behind (not ahead of) the sell-side in ML adoption, with only 22-28% adoption rates. Both sides use trading algorithms, and sell-side provides research and execution services.",
+      "type": "multi-select"
     },
     {
       "id": 27,
@@ -973,7 +1009,8 @@
         "c",
         "e"
       ],
-      "explanation": "An algo wheel randomizes order routing across brokers. About 300 orders per broker generates useful data. ML-based handicapping normalizes for order difficulty, enabling fair comparison. Without it, comparisons are misleading since brokers receive different order types. The concept is not limited to equities only."
+      "explanation": "An algo wheel randomizes order routing across brokers. About 300 orders per broker generates useful data. ML-based handicapping normalizes for order difficulty, enabling fair comparison. Without it, comparisons are misleading since brokers receive different order types. The concept is not limited to equities only.",
+      "type": "multi-select"
     },
     {
       "id": 28,
@@ -1007,7 +1044,8 @@
         "c",
         "d"
       ],
-      "explanation": "Hedge funds are lightly regulated and require accredited investors, aiming for absolute returns. Mutual funds are SEC-regulated, open to retail investors, and measured against benchmarks. Hedge funds are notorious for secrecy and do NOT disclose strategies in a prospectus. Hedge fund advertising is generally prohibited (though rules are evolving)."
+      "explanation": "Hedge funds are lightly regulated and require accredited investors, aiming for absolute returns. Mutual funds are SEC-regulated, open to retail investors, and measured against benchmarks. Hedge funds are notorious for secrecy and do NOT disclose strategies in a prospectus. Hedge fund advertising is generally prohibited (though rules are evolving).",
+      "type": "multi-select"
     },
     {
       "id": 29,
@@ -1041,7 +1079,8 @@
         "b",
         "c"
       ],
-      "explanation": "2% on AUM, 20% on profits, management fee paid regardless. Renaissance Medallion charges ~5/44, far exceeding standard. The claim no fund charges more is false."
+      "explanation": "2% on AUM, 20% on profits, management fee paid regardless. Renaissance Medallion charges ~5/44, far exceeding standard. The claim no fund charges more is false.",
+      "type": "multi-select"
     },
     {
       "id": 30,
@@ -1074,7 +1113,8 @@
         "a",
         "b"
       ],
-      "explanation": "Four core hedge fund strategies: Equity, Arbitrage, Momentum/Directional, Event-Driven. Passive index tracking and dollar-cost averaging are investment techniques, not hedge fund strategy categories."
+      "explanation": "Four core hedge fund strategies: Equity, Arbitrage, Momentum/Directional, Event-Driven. Passive index tracking and dollar-cost averaging are investment techniques, not hedge fund strategy categories.",
+      "type": "multi-select"
     },
     {
       "id": 31,
@@ -1108,7 +1148,8 @@
         "b",
         "c"
       ],
-      "explanation": "Long/short equity holds long positions in undervalued stocks and short positions in overvalued ones. The short leg hedges against broad market declines. A 130/30 strategy uses leverage ($130 long, $30 short per $100 capital). Leverage IS essential for arbitrage because profit margins are SMALL per trade. The strategy can profit in various market conditions, not just up markets."
+      "explanation": "Long/short equity holds long positions in undervalued stocks and short positions in overvalued ones. The short leg hedges against broad market declines. A 130/30 strategy uses leverage ($130 long, $30 short per $100 capital). Leverage IS essential for arbitrage because profit margins are SMALL per trade. The strategy can profit in various market conditions, not just up markets.",
+      "type": "multi-select"
     },
     {
       "id": 32,
@@ -1142,7 +1183,8 @@
         "b",
         "d"
       ],
-      "explanation": "Fixed income arb exploits on-the-run vs. off-the-run Treasury pricing. Stat arb uses quantitative models on correlated assets, betting on convergence. Merger arb involves buying the TARGET company (not the acquirer) at a discount to the offer price. Arbitrage is NOT risk-free in practice — execution risk, model risk, and deal failure (in merger arb) all pose real risks."
+      "explanation": "Fixed income arb exploits on-the-run vs. off-the-run Treasury pricing. Stat arb uses quantitative models on correlated assets, betting on convergence. Merger arb involves buying the TARGET company (not the acquirer) at a discount to the offer price. Arbitrage is NOT risk-free in practice — execution risk, model risk, and deal failure (in merger arb) all pose real risks.",
+      "type": "multi-select"
     },
     {
       "id": 33,
@@ -1176,7 +1218,8 @@
         "b",
         "e"
       ],
-      "explanation": "ETFs have low expense ratios (0.01-1%) and 3-4 letter symbols. Mutual funds use 5-letter symbols. Hedge funds use their full name (no ticker). Hedge funds are the LEAST transparent (notorious for secrecy), not the most. Mutual funds are priced once daily at NAV — they cannot be freely traded intraday like ETFs."
+      "explanation": "ETFs have low expense ratios (0.01-1%) and 3-4 letter symbols. Mutual funds use 5-letter symbols. Hedge funds use their full name (no ticker). Hedge funds are the LEAST transparent (notorious for secrecy), not the most. Mutual funds are priced once daily at NAV — they cannot be freely traded intraday like ETFs.",
+      "type": "multi-select"
     },
     {
       "id": 34,
@@ -1211,7 +1254,8 @@
         "c",
         "e"
       ],
-      "explanation": "Sharpe = (Rp - Rf) / σp. It's excellent above 1.0, uses std dev as risk, and requires subtracting the risk-free rate. Higher total returns do NOT guarantee a higher Sharpe — if the volatility is proportionally much higher, the Sharpe can be lower despite higher absolute returns."
+      "explanation": "Sharpe = (Rp - Rf) / σp. It's excellent above 1.0, uses std dev as risk, and requires subtracting the risk-free rate. Higher total returns do NOT guarantee a higher Sharpe — if the volatility is proportionally much higher, the Sharpe can be lower despite higher absolute returns.",
+      "type": "multi-select"
     },
     {
       "id": 35,
@@ -1246,7 +1290,8 @@
         "c",
         "e"
       ],
-      "explanation": "In merger arb, you buy the target at a discount to the offer price, profiting from the spread if the deal closes. The main risk is deal failure. If the deal FAILS, the target's price typically DROPS back to pre-announcement levels (not rises). Merger arb is classified as event-driven."
+      "explanation": "In merger arb, you buy the target at a discount to the offer price, profiting from the spread if the deal closes. The main risk is deal failure. If the deal FAILS, the target's price typically DROPS back to pre-announcement levels (not rises). Merger arb is classified as event-driven.",
+      "type": "multi-select"
     },
     {
       "id": 36,
@@ -1281,7 +1326,8 @@
         "c",
         "e"
       ],
-      "explanation": "Leverage borrows to increase positions, magnifying both gains and losses. In 130/30, $30 is borrowed to add long exposure. Arbitrage needs leverage because per-trade margins are tiny. Leverage INCREASES risk, not reduces it — it amplifies the impact of both favorable and unfavorable price movements."
+      "explanation": "Leverage borrows to increase positions, magnifying both gains and losses. In 130/30, $30 is borrowed to add long exposure. Arbitrage needs leverage because per-trade margins are tiny. Leverage INCREASES risk, not reduces it — it amplifies the impact of both favorable and unfavorable price movements.",
+      "type": "multi-select"
     },
     {
       "id": 37,
@@ -1315,7 +1361,8 @@
         "b",
         "c"
       ],
-      "explanation": "Hedge funds require accredited investors, often impose lock-up periods, and sell alpha (skill). NOT all strategies are market-neutral — momentum/directional strategies explicitly take market bets. Hedge funds are largely EXEMPT from the Investment Company Act of 1940 (which governs mutual funds), relying instead on investor restrictions for their regulatory exemption."
+      "explanation": "Hedge funds require accredited investors, often impose lock-up periods, and sell alpha (skill). NOT all strategies are market-neutral — momentum/directional strategies explicitly take market bets. Hedge funds are largely EXEMPT from the Investment Company Act of 1940 (which governs mutual funds), relying instead on investor restrictions for their regulatory exemption.",
+      "type": "multi-select"
     },
     {
       "id": 38,
@@ -1349,7 +1396,8 @@
         "b",
         "c"
       ],
-      "explanation": "The three valuation approaches are: asset-based (Book Value = Assets - Liabilities), relative (peer multiples like P/E), and DCF (present value of future cash flows). Book value is based on historical cost and ignores intangibles, so it often DOESN'T reflect true market value. Relative valuation is NOT immune to bubbles — if the whole market is overvalued, peer comparisons confirm wrong prices."
+      "explanation": "The three valuation approaches are: asset-based (Book Value = Assets - Liabilities), relative (peer multiples like P/E), and DCF (present value of future cash flows). Book value is based on historical cost and ignores intangibles, so it often DOESN'T reflect true market value. Relative valuation is NOT immune to bubbles — if the whole market is overvalued, peer comparisons confirm wrong prices.",
+      "type": "multi-select"
     },
     {
       "id": 39,
@@ -1383,7 +1431,8 @@
         "b",
         "c"
       ],
-      "explanation": "DCF: V0 = sum CF/(1+r)^t. Higher r = lower value. Gordon: V0 = D1/(r-g). The discount rate has MAJOR impact - small changes cause large swings in value."
+      "explanation": "DCF: V0 = sum CF/(1+r)^t. Higher r = lower value. Gordon: V0 = D1/(r-g). The discount rate has MAJOR impact - small changes cause large swings in value.",
+      "type": "multi-select"
     },
     {
       "id": 40,
@@ -1416,7 +1465,8 @@
         "a",
         "d"
       ],
-      "explanation": "CAPM: E(Ri)=Rf+B(E(Rm)-Rf). Beta measures sensitivity to MARKET (not interest rates). Rf uses TREASURY yields (not corporate). CAPM compensates only for systematic risk. B=0.5 moves half as much."
+      "explanation": "CAPM: E(Ri)=Rf+B(E(Rm)-Rf). Beta measures sensitivity to MARKET (not interest rates). Rf uses TREASURY yields (not corporate). CAPM compensates only for systematic risk. B=0.5 moves half as much.",
+      "type": "multi-select"
     },
     {
       "id": 41,
@@ -1450,7 +1500,8 @@
         "b",
         "c"
       ],
-      "explanation": "B=1.0: with market. B>1.0: more volatile. B<1.0: less volatile. Negative B = OPPOSITE movement (not same direction slower). B=0: uncorrelated."
+      "explanation": "B=1.0: with market. B>1.0: more volatile. B<1.0: less volatile. Negative B = OPPOSITE movement (not same direction slower). B=0: uncorrelated.",
+      "type": "multi-select"
     },
     {
       "id": 42,
@@ -1483,7 +1534,8 @@
         "a",
         "e"
       ],
-      "explanation": "Alpha = actual return - CAPM predicted. Alpha > 0 = VALUE ADDED (not just more risk). Alpha < 0 = UNDERPERFORMANCE relative to risk (not necessarily negative returns). SML: undervalued above line. Index fund targets alpha near 0."
+      "explanation": "Alpha = actual return - CAPM predicted. Alpha > 0 = VALUE ADDED (not just more risk). Alpha < 0 = UNDERPERFORMANCE relative to risk (not necessarily negative returns). SML: undervalued above line. Index fund targets alpha near 0.",
+      "type": "multi-select"
     },
     {
       "id": 43,
@@ -1517,7 +1569,8 @@
         "b",
         "c"
       ],
-      "explanation": "Setting portfolio B=0 eliminates market risk. Adjust long AND short weights. Returns depend on alpha. BOTH long and short needed - long-only retains full market exposure."
+      "explanation": "Setting portfolio B=0 eliminates market risk. Adjust long AND short weights. Returns depend on alpha. BOTH long and short needed - long-only retains full market exposure.",
+      "type": "multi-select"
     },
     {
       "id": 44,
@@ -1552,7 +1605,8 @@
         "c",
         "e"
       ],
-      "explanation": "To get β_p = 0: w_A(1.0) + w_B(2.0) = 0, so w_A = -2w_B. With |w_A| + |w_B| = 1: w_A = 2/3, w_B = -1/3. Portfolio return = (2/3)(0.01) + (-1/3)(-0.01) = 0.01 = 1%, independent of market. Equal weights (50/50) give β_p = 0.5(1) + (-0.5)(2) = -0.5, NOT zero."
+      "explanation": "To get β_p = 0: w_A(1.0) + w_B(2.0) = 0, so w_A = -2w_B. With |w_A| + |w_B| = 1: w_A = 2/3, w_B = -1/3. Portfolio return = (2/3)(0.01) + (-1/3)(-0.01) = 0.01 = 1%, independent of market. Equal weights (50/50) give β_p = 0.5(1) + (-0.5)(2) = -0.5, NOT zero.",
+      "type": "multi-select"
     },
     {
       "id": 45,
@@ -1587,7 +1641,8 @@
         "c",
         "e"
       ],
-      "explanation": "Margin of safety means buying below intrinsic value to buffer against errors. Graham's rule: 'buy dollar bills for 50 cents.' The philosophy favors being 'roughly right rather than precisely wrong.' Valuation should produce a RANGE, not a precise target — precise prices give false confidence in inherently uncertain estimates."
+      "explanation": "Margin of safety means buying below intrinsic value to buffer against errors. Graham's rule: 'buy dollar bills for 50 cents.' The philosophy favors being 'roughly right rather than precisely wrong.' Valuation should produce a RANGE, not a precise target — precise prices give false confidence in inherently uncertain estimates.",
+      "type": "multi-select"
     },
     {
       "id": 46,
@@ -1622,7 +1677,8 @@
         "c",
         "d"
       ],
-      "explanation": "Weak form: past prices are reflected (technical analysis fails). Semi-strong: all public info reflected (fundamental analysis fails). Strong: all info including private (even insider trading fails). However, EMH does NOT prove nobody has ever beaten the market — it's a theoretical framework, and empirical evidence shows some investors (like Buffett) have beaten it, though debate continues."
+      "explanation": "Weak form: past prices are reflected (technical analysis fails). Semi-strong: all public info reflected (fundamental analysis fails). Strong: all info including private (even insider trading fails). However, EMH does NOT prove nobody has ever beaten the market — it's a theoretical framework, and empirical evidence shows some investors (like Buffett) have beaten it, though debate continues.",
+      "type": "multi-select"
     },
     {
       "id": 47,
@@ -1656,7 +1712,8 @@
         "b",
         "d"
       ],
-      "explanation": "Systematic: market-wide. Idiosyncratic: company-specific. Diversification eliminates idiosyncratic (not systematic). CAPM compensates for systematic only. Need 20+ stocks (not 2-3)."
+      "explanation": "Systematic: market-wide. Idiosyncratic: company-specific. Diversification eliminates idiosyncratic (not systematic). CAPM compensates for systematic only. Need 20+ stocks (not 2-3).",
+      "type": "multi-select"
     },
     {
       "id": 48,
@@ -1691,7 +1748,8 @@
         "c",
         "d"
       ],
-      "explanation": "The SML plots beta vs. expected return, starting at Rf and passing through the market portfolio (β=1). Above the line = undervalued (positive alpha); below = overvalued (negative alpha). The slope of the SML equals the MARKET RISK PREMIUM (E(Rm) - Rf), not the risk-free rate."
+      "explanation": "The SML plots beta vs. expected return, starting at Rf and passing through the market portfolio (β=1). Above the line = undervalued (positive alpha); below = overvalued (negative alpha). The slope of the SML equals the MARKET RISK PREMIUM (E(Rm) - Rf), not the risk-free rate.",
+      "type": "multi-select"
     },
     {
       "id": 49,
@@ -1726,7 +1784,8 @@
         "c",
         "e"
       ],
-      "explanation": "Random Walk Theory says prices change randomly driven by new information, making each day's change independent of previous changes. This is closely tied to EMH. If prices follow a random walk, chart patterns CANNOT reliably predict future prices — that's precisely what the theory denies."
+      "explanation": "Random Walk Theory says prices change randomly driven by new information, making each day's change independent of previous changes. This is closely tied to EMH. If prices follow a random walk, chart patterns CANNOT reliably predict future prices — that's precisely what the theory denies.",
+      "type": "multi-select"
     },
     {
       "id": 50,
@@ -1759,7 +1818,8 @@
         "a",
         "d"
       ],
-      "explanation": "Technical: price and volume only. Fundamental: earnings, dividends, cash flows, book value (NOT price patterns). Technical works SHORT-term, not long. P/E ratio is fundamental."
+      "explanation": "Technical: price and volume only. Fundamental: earnings, dividends, cash flows, book value (NOT price patterns). Technical works SHORT-term, not long. P/E ratio is fundamental.",
+      "type": "multi-select"
     },
     {
       "id": 51,
@@ -1769,7 +1829,7 @@
       "options": [
         {
           "id": "a",
-          "text": "Individual indicators are weakly predictive because many traders follow them"
+          "text": "Individual indicators lose predictive power when widely followed, as mass adoption creates self-fulfilling and self-defeating dynamics"
         },
         {
           "id": "b",
@@ -1793,7 +1853,8 @@
         "b",
         "c"
       ],
-      "explanation": "Individual indicators weak. Combining 3-5 with ML stronger. Contrasts reveal opportunities. Technical works SHORT-TERM (not multi-year)."
+      "explanation": "Individual indicators lose predictive power when widely followed due to self-fulfilling/self-defeating dynamics. Combining 3-5 indicators with ML yields stronger predictions. Contrasts between a stock and the market reveal opportunities. Technical analysis works SHORT-TERM (not multi-year).",
+      "type": "multi-select"
     },
     {
       "id": 52,
@@ -1828,7 +1889,8 @@
         "c",
         "e"
       ],
-      "explanation": "SMA is the arithmetic mean (not geometric) of prices over an n-day window. SMA lags the actual price — peaks and troughs appear later. Price crossing through SMA is a signal. Price excursions from SMA tend to regress back toward the average, presenting trading opportunities."
+      "explanation": "SMA is the arithmetic mean (not geometric) of prices over an n-day window. SMA lags the actual price — peaks and troughs appear later. Price crossing through SMA is a signal. Price excursions from SMA tend to regress back toward the average, presenting trading opportunities.",
+      "type": "multi-select"
     },
     {
       "id": 53,
@@ -1862,7 +1924,8 @@
         "b",
         "c"
       ],
-      "explanation": "BB = SMA +/- 2 sigma. Bands widen/narrow with volatility. Buy: outside-to-inside lower band. r ranges -1 to 1 (not -10 to 10)."
+      "explanation": "BB = SMA +/- 2 sigma. Bands widen/narrow with volatility. Buy: outside-to-inside lower band. r ranges -1 to 1 (not -10 to 10).",
+      "type": "multi-select"
     },
     {
       "id": 54,
@@ -1895,7 +1958,8 @@
         "a",
         "d"
       ],
-      "explanation": "Momentum = price[t]/price[t-n] - 1. Negative = price FALL (not flat). Values typically -0.5 to 0.5 (not -5 to 5). Traders buy on positive momentum. Momentum uses only price."
+      "explanation": "Momentum = price[t]/price[t-n] - 1. Negative = price FALL (not flat). Values typically -0.5 to 0.5 (not -5 to 5). Traders buy on positive momentum. Momentum uses only price.",
+      "type": "multi-select"
     },
     {
       "id": 55,
@@ -1930,7 +1994,8 @@
         "c",
         "d"
       ],
-      "explanation": "At HFT horizons, only price/volume matter. Over years, fundamentals dominate. Short horizons need fast decisions; long horizons need complex analysis. Computers excel at short-term (simple decisions, high speed) while humans often outperform at long-term horizons where complex judgment is needed. Computers do NOT outperform at all horizons."
+      "explanation": "At HFT horizons, only price/volume matter. Over years, fundamentals dominate. Short horizons need fast decisions; long horizons need complex analysis. Computers excel at short-term (simple decisions, high speed) while humans often outperform at long-term horizons where complex judgment is needed. Computers do NOT outperform at all horizons.",
+      "type": "multi-select"
     },
     {
       "id": 56,
@@ -1965,7 +2030,8 @@
         "c",
         "e"
       ],
-      "explanation": "Normalization uses z-score: (values - mean) / std, centering around 0 with unit variance. Without it, ML algorithms overweight larger-range indicators. P/E ratio (1-300) would dominate smaller-range indicators. Although Bollinger and Momentum have similar ranges, they are NOT already perfectly normalized — they still have different means and standard deviations that normalization corrects."
+      "explanation": "Normalization uses z-score: (values - mean) / std, centering around 0 with unit variance. Without it, ML algorithms overweight larger-range indicators. P/E ratio (1-300) would dominate smaller-range indicators. Although Bollinger and Momentum have similar ranges, they are NOT already perfectly normalized — they still have different means and standard deviations that normalization corrects.",
+      "type": "multi-select"
     },
     {
       "id": 57,
@@ -2000,7 +2066,8 @@
         "d",
         "e"
       ],
-      "explanation": "Buy signal: price crosses from outside to inside the LOWER band. Sell signal: price crosses from outside to inside the UPPER band. The general rule is outside-to-inside crossovers. Price crossing from INSIDE to OUTSIDE is NOT a signal (though it indicates a significant excursion). Prices rarely break out since bands are 2σ away."
+      "explanation": "Buy signal: price crosses from outside to inside the LOWER band. Sell signal: price crosses from outside to inside the UPPER band. The general rule is outside-to-inside crossovers. Price crossing from INSIDE to OUTSIDE is NOT a signal (though it indicates a significant excursion). Prices rarely break out since bands are 2σ away.",
+      "type": "multi-select"
     },
     {
       "id": 58,
@@ -2034,7 +2101,8 @@
         "b",
         "d"
       ],
-      "explanation": "P/E ratio, intrinsic value (dividend-based), and book value are all fundamental factors — they consider earnings, dividends, and balance sheet data. Simple Moving Average of price and percent change in volume are TECHNICAL indicators since they consider only price and volume data."
+      "explanation": "P/E ratio, intrinsic value (dividend-based), and book value are all fundamental factors — they consider earnings, dividends, and balance sheet data. Simple Moving Average of price and percent change in volume are TECHNICAL indicators since they consider only price and volume data.",
+      "type": "multi-select"
     },
     {
       "id": 59,
@@ -2069,7 +2137,8 @@
         "c",
         "d"
       ],
-      "explanation": "When SMA > price, the stock is below its average (buy). When SMA < price, the stock is above average (sell). Larger n makes crossovers more significant. SMA can approximate underlying value over large windows. SMA signals are WEAKER alone — combining with other indicators (momentum, Bollinger Bands) provides stronger signals, as individual indicators are weakly predictive."
+      "explanation": "When SMA > price, the stock is below its average (buy). When SMA < price, the stock is above average (sell). Larger n makes crossovers more significant. SMA can approximate underlying value over large windows. SMA signals are WEAKER alone — combining with other indicators (momentum, Bollinger Bands) provides stronger signals, as individual indicators are weakly predictive.",
+      "type": "multi-select"
     },
     {
       "id": 60,
@@ -2102,7 +2171,8 @@
         "a",
         "b"
       ],
-      "explanation": "Parametric regression learns parameters; training data discarded. Polynomial has MORE parameters (not fewer). For degree d: d+1 values needed (not d). Parametric models CAN extrapolate."
+      "explanation": "Parametric regression learns parameters; training data discarded. Polynomial has MORE parameters (not fewer). For degree d: d+1 values needed (not d). Parametric models CAN extrapolate.",
+      "type": "multi-select"
     },
     {
       "id": 61,
@@ -2136,7 +2206,8 @@
         "b",
         "d"
       ],
-      "explanation": "KNN averages the y-values of K nearest neighbors. It's instance-based and retains all data. KNN CANNOT extrapolate — it produces flat lines at boundaries because the neighbors don't change beyond the data range. Adding new data does NOT require retraining — you simply add the new point to the dataset (training time is zero for KNN)."
+      "explanation": "KNN averages the y-values of K nearest neighbors. It's instance-based and retains all data. KNN CANNOT extrapolate — it produces flat lines at boundaries because the neighbors don't change beyond the data range. Adding new data does NOT require retraining — you simply add the new point to the dataset (training time is zero for KNN).",
+      "type": "multi-select"
     },
     {
       "id": 62,
@@ -2170,7 +2241,8 @@
         "b",
         "c"
       ],
-      "explanation": "Parametric: space-efficient, fast queries, slow training. KNN: zero training, stores everything, slow queries. Adding data to KNN requires NO retraining. Parametric doesn't always beat KNN."
+      "explanation": "Parametric: space-efficient, fast queries, slow training. KNN: zero training, stores everything, slow queries. Adding data to KNN requires NO retraining. Parametric doesn't always beat KNN.",
+      "type": "multi-select"
     },
     {
       "id": 63,
@@ -2204,7 +2276,8 @@
         "b",
         "c"
       ],
-      "explanation": "LinReg beats KNN when: linear relationship, high dimensions, few observations. For TRAINING SPEED, KNN wins (zero training time). LinReg wins on interpretability."
+      "explanation": "LinReg beats KNN when: linear relationship, high dimensions, few observations. For TRAINING SPEED, KNN wins (zero training time). LinReg wins on interpretability.",
+      "type": "multi-select"
     },
     {
       "id": 64,
@@ -2239,7 +2312,8 @@
         "c",
         "e"
       ],
-      "explanation": "Kernel regression is instance-based like KNN but weights contributions by distance (closer = more weight). This produces smoother predictions. It does NOT learn explicit parameters — it's non-parametric and uses all training data at query time."
+      "explanation": "Kernel regression is instance-based like KNN but weights contributions by distance (closer = more weight). This produces smoother predictions. It does NOT learn explicit parameters — it's non-parametric and uses all training data at query time.",
+      "type": "multi-select"
     },
     {
       "id": 65,
@@ -2274,7 +2348,8 @@
         "c",
         "e"
       ],
-      "explanation": "As dimensions increase, data becomes sparse, nearest neighbors become distant, and KNN degrades. 50 points in 20D are far more isolated than in 1D. Increasing data helps but does NOT fully solve the curse — the amount of data needed grows exponentially with dimensions."
+      "explanation": "As dimensions increase, data becomes sparse, nearest neighbors become distant, and KNN degrades. 50 points in 20D are far more isolated than in 1D. Increasing data helps but does NOT fully solve the curse — the amount of data needed grows exponentially with dimensions.",
+      "type": "multi-select"
     },
     {
       "id": 66,
@@ -2308,7 +2383,8 @@
         "b",
         "c"
       ],
-      "explanation": "Standard API: constructor, train, query. KNN constructor takes K. LinReg uses LEAST SQUARES (not KNN). Query returns predictions."
+      "explanation": "Standard API: constructor, train, query. KNN constructor takes K. LinReg uses LEAST SQUARES (not KNN). Query returns predictions.",
+      "type": "multi-select"
     },
     {
       "id": 67,
@@ -2342,7 +2418,8 @@
         "b",
         "c"
       ],
-      "explanation": "Out-of-sample: separate train/test. Train old, test new for finance. 60/40 or 80/20 is common (NOT 90% test / 10% train). Testing on training data is biased."
+      "explanation": "Out-of-sample: separate train/test. Train old, test new for finance. 60/40 or 80/20 is common (NOT 90% test / 10% train). Testing on training data is biased.",
+      "type": "multi-select"
     },
     {
       "id": 68,
@@ -2376,7 +2453,8 @@
         "b",
         "c"
       ],
-      "explanation": "ML trading uses features to predict future prices. Backtesting uses SEPARATE train/test periods (NOT same period). ML models don't guarantee accuracy."
+      "explanation": "ML trading uses features to predict future prices. Backtesting uses SEPARATE train/test periods (NOT same period). ML models don't guarantee accuracy.",
+      "type": "multi-select"
     },
     {
       "id": 69,
@@ -2411,7 +2489,8 @@
         "c",
         "d"
       ],
-      "explanation": "Regression = numerical prediction. Supervised = learning from labeled (X,Y) pairs. Common algorithms include LinReg, KNN, decision trees, and forests. Reinforcement learning addresses position sizing and holding decisions. Regression forecasting is NOT free from noise — it's explicitly acknowledged as noisy and uncertain."
+      "explanation": "Regression = numerical prediction. Supervised = learning from labeled (X,Y) pairs. Common algorithms include LinReg, KNN, decision trees, and forests. Reinforcement learning addresses position sizing and holding decisions. Regression forecasting is NOT free from noise — it's explicitly acknowledged as noisy and uncertain.",
+      "type": "multi-select"
     },
     {
       "id": 70,
@@ -2443,7 +2522,8 @@
       "correctAnswers": [
         "a"
       ],
-      "explanation": "Root holds all data. Internal/decision nodes SPLIT data (they don't contain final predictions). LEAF nodes contain predictions (they don't split). Each root-to-leaf path is a CONJUNCTION (AND), not disjunction. Decision trees work for both classification and regression."
+      "explanation": "Root holds all data. Internal/decision nodes SPLIT data (they don't contain final predictions). LEAF nodes contain predictions (they don't split). Each root-to-leaf path is a CONJUNCTION (AND), not disjunction. Decision trees work for both classification and regression.",
+      "type": "multi-select"
     },
     {
       "id": 71,
@@ -2478,7 +2558,8 @@
         "c",
         "d"
       ],
-      "explanation": "Classification trees: discrete output, mode at leaves. Regression trees: continuous output, mean at leaves. The tree STRUCTURE is identical between the two — only the output mechanism (mode vs. mean) and splitting criteria differ. The fundamental splitting algorithm (recursive, greedy) is the same."
+      "explanation": "Classification trees: discrete output, mode at leaves. Regression trees: continuous output, mean at leaves. The tree STRUCTURE is identical between the two — only the output mechanism (mode vs. mean) and splitting criteria differ. The fundamental splitting algorithm (recursive, greedy) is the same.",
+      "type": "multi-select"
     },
     {
       "id": 72,
@@ -2511,7 +2592,8 @@
         "c",
         "d"
       ],
-      "explanation": "build_tree IS recursive (not iterative). It IS greedy (not exhaustive). Checks stopping condition, finds best split, partitions, recurses. Greedy = locally optimal without global guarantee."
+      "explanation": "build_tree IS recursive (not iterative). It IS greedy (not exhaustive). Checks stopping condition, finds best split, partitions, recurses. Greedy = locally optimal without global guarantee.",
+      "type": "multi-select"
     },
     {
       "id": 73,
@@ -2545,7 +2627,8 @@
         "b",
         "c"
       ],
-      "explanation": "Entropy: low = pure. Gini: low = pure. Correlation measures linear relationship. ML4T uses CORRELATION (not Gini) for regression trees."
+      "explanation": "Entropy: low = pure. Gini: low = pure. Correlation measures linear relationship. ML4T uses CORRELATION (not Gini) for regression trees.",
+      "type": "multi-select"
     },
     {
       "id": 74,
@@ -2580,7 +2663,8 @@
         "c",
         "d"
       ],
-      "explanation": "The median is used as the split threshold, creating balanced branches. leaf_size controls stopping — with leaf_size=1, every point gets its own leaf (perfect fit). Larger leaf_size does NOT always lead to worse predictions — it prevents overfitting and can IMPROVE out-of-sample predictions up to an optimal point."
+      "explanation": "The median is used as the split threshold, creating balanced branches. leaf_size controls stopping — with leaf_size=1, every point gets its own leaf (perfect fit). Larger leaf_size does NOT always lead to worse predictions — it prevents overfitting and can IMPROVE out-of-sample predictions up to an optimal point.",
+      "type": "multi-select"
     },
     {
       "id": 75,
@@ -2615,7 +2699,8 @@
         "c",
         "d"
       ],
-      "explanation": "ID3 uses a greedy, top-down recursive approach, selecting features via information gain (entropy) at each node. It prefers shorter trees (Occam's Razor). Decision trees have a completely expressive hypothesis space — they can represent any function from instances to discrete-valued classifications. ID3 does NOT perform exhaustive search — it uses greedy, hill-climbing search through the hypothesis space."
+      "explanation": "ID3 uses a greedy, top-down recursive approach, selecting features via information gain (entropy) at each node. It prefers shorter trees (Occam's Razor). Decision trees have a completely expressive hypothesis space — they can represent any function from instances to discrete-valued classifications. ID3 does NOT perform exhaustive search — it uses greedy, hill-climbing search through the hypothesis space.",
+      "type": "multi-select"
     },
     {
       "id": 76,
@@ -2649,7 +2734,8 @@
         "b",
         "d"
       ],
-      "explanation": "LinReg: global equation. Trees: local rules. Trees can't extrapolate. For LINEAR trends, LinReg is better. Trees excel at non-linear data."
+      "explanation": "LinReg: global equation. Trees: local rules. Trees can't extrapolate. For LINEAR trends, LinReg is better. Trees excel at non-linear data.",
+      "type": "multi-select"
     },
     {
       "id": 77,
@@ -2683,7 +2769,8 @@
         "b",
         "c"
       ],
-      "explanation": "Dominant features cause correlated trees. Averaging identical models doesn't reduce variance. Solution is RANDOM FORESTS (not single tree)."
+      "explanation": "Dominant features cause correlated trees. Averaging identical models doesn't reduce variance. Solution is RANDOM FORESTS (not single tree).",
+      "type": "multi-select"
     },
     {
       "id": 78,
@@ -2718,7 +2805,8 @@
         "c",
         "d"
       ],
-      "explanation": "KNN uses Euclidean distance, so features with larger scales dominate without normalization. Decision Trees process features independently (e.g., 'is Price > threshold?') and only care about ordering. NOT all ML algorithms require normalization — it depends on whether the algorithm is distance-based (KNN, SVM) or not (Decision Trees)."
+      "explanation": "KNN uses Euclidean distance, so features with larger scales dominate without normalization. Decision Trees process features independently (e.g., 'is Price > threshold?') and only care about ordering. NOT all ML algorithms require normalization — it depends on whether the algorithm is distance-based (KNN, SVM) or not (Decision Trees).",
+      "type": "multi-select"
     },
     {
       "id": 79,
@@ -2753,7 +2841,8 @@
         "c",
         "d"
       ],
-      "explanation": "A decision tree = OR(AND conditions along each path). Each root-to-leaf path is an AND of conditions. The tree is the OR of all paths. The geometric model partitions space into hyper-rectangles with a constant prediction per rectangle. Leaves do NOT correspond to single data points (unless leaf_size=1 and there's one point per leaf) — they typically average multiple points."
+      "explanation": "A decision tree = OR(AND conditions along each path). Each root-to-leaf path is an AND of conditions. The tree is the OR of all paths. The geometric model partitions space into hyper-rectangles with a constant prediction per rectangle. Leaves do NOT correspond to single data points (unless leaf_size=1 and there's one point per leaf) — they typically average multiple points.",
+      "type": "multi-select"
     },
     {
       "id": 80,
@@ -2786,7 +2875,8 @@
         "a",
         "b"
       ],
-      "explanation": "DTLearner: evaluates all features. RTLearner: picks randomly. RTLearner is FASTER (not slower). RTLearner does NOT produce identical trees (randomness). Creates diversity for ensembles."
+      "explanation": "DTLearner: evaluates all features. RTLearner: picks randomly. RTLearner is FASTER (not slower). RTLearner does NOT produce identical trees (randomness). Creates diversity for ensembles.",
+      "type": "multi-select"
     },
     {
       "id": 81,
@@ -2821,7 +2911,8 @@
         "c",
         "d"
       ],
-      "explanation": "Entropy = -Σ p(x)log₂p(x). Maximum entropy = uniform distribution (maximum uncertainty). Zero entropy = pure group. Information gain = entropy before split - weighted entropy after split. We select the feature that MAXIMIZES information gain (maximum reduction in uncertainty), not minimizes."
+      "explanation": "Entropy = -Σ p(x)log₂p(x). Maximum entropy = uniform distribution (maximum uncertainty). Zero entropy = pure group. Information gain = entropy before split - weighted entropy after split. We select the feature that MAXIMIZES information gain (maximum reduction in uncertainty), not minimizes.",
+      "type": "multi-select"
     },
     {
       "id": 82,
@@ -2853,7 +2944,8 @@
       "correctAnswers": [
         "a"
       ],
-      "explanation": "Ensembles combine multiple models. Regression uses MEAN (not max). Classification uses MODE/vote (not mean). Ensembles are LESS likely to overfit. They do NOT require all models to be the same type."
+      "explanation": "Ensembles combine multiple models. Regression uses MEAN (not max). Classification uses MODE/vote (not mean). Ensembles are LESS likely to overfit. They do NOT require all models to be the same type.",
+      "type": "multi-select"
     },
     {
       "id": 83,
@@ -2888,7 +2980,8 @@
         "c",
         "e"
       ],
-      "explanation": "Ensemble power comes from bias cancellation — each model is biased differently, and combining them smooths this out. Mixing model types (polynomial + KNN) prevents single-approach bias. This is the 'wisdom of crowds.' Ensembles do NOT achieve zero error — they reduce error compared to individual models but don't eliminate it."
+      "explanation": "Ensemble power comes from bias cancellation — each model is biased differently, and combining them smooths this out. Mixing model types (polynomial + KNN) prevents single-approach bias. This is the 'wisdom of crowds.' Ensembles do NOT achieve zero error — they reduce error compared to individual models but don't eliminate it.",
+      "type": "multi-select"
     },
     {
       "id": 84,
@@ -2920,7 +3013,8 @@
       "correctAnswers": [
         "a"
       ],
-      "explanation": "Bagging creates m bags via sampling with replacement. Each bag is the SAME size (not different). Each bag TRAINS (not evaluates) a model. Predictions combine ALL models (not just the best). Bagging uses the same learner TYPE per bag."
+      "explanation": "Bagging creates m bags via sampling with replacement. Each bag is the SAME size (not different). Each bag TRAINS (not evaluates) a model. Predictions combine ALL models (not just the best). Bagging uses the same learner TYPE per bag.",
+      "type": "multi-select"
     },
     {
       "id": 85,
@@ -2955,7 +3049,8 @@
         "c",
         "e"
       ],
-      "explanation": "1-NN perfectly fits training data (overfits). Ensembles of 1-NN on different bags generalize better because errors in individual models are averaged out. More models = smoother predictions. Bagging reduces VARIANCE (not bias) — it averages out the noise of high-variance models (like deep trees or low-K KNN)."
+      "explanation": "1-NN perfectly fits training data (overfits). Ensembles of 1-NN on different bags generalize better because errors in individual models are averaged out. More models = smoother predictions. Bagging reduces VARIANCE (not bias) — it averages out the noise of high-variance models (like deep trees or low-K KNN).",
+      "type": "multi-select"
     },
     {
       "id": 86,
@@ -2989,7 +3084,8 @@
         "b",
         "c"
       ],
-      "explanation": "RF = Bagging + random feature subsets. This decorrelates trees. Random selection makes trees MORE DIVERSE (not identical). RF is actually faster."
+      "explanation": "RF = Bagging + random feature subsets. This decorrelates trees. Random selection makes trees MORE DIVERSE (not identical). RF is actually faster.",
+      "type": "multi-select"
     },
     {
       "id": 87,
@@ -3024,7 +3120,8 @@
         "c",
         "e"
       ],
-      "explanation": "Boosting (AdaBoost) iteratively reweights misclassified examples, focusing each successive model on previous failures. It reduces BIAS by training weak learners sequentially. As m increases, it focuses more on specific hard examples. Boosting is MORE susceptible to overfitting than bagging (not less), precisely because it strives to fit specific difficult data points."
+      "explanation": "Boosting (AdaBoost) iteratively reweights misclassified examples, focusing each successive model on previous failures. It reduces BIAS by training weak learners sequentially. As m increases, it focuses more on specific hard examples. Boosting is MORE susceptible to overfitting than bagging (not less), precisely because it strives to fit specific difficult data points.",
+      "type": "multi-select"
     },
     {
       "id": 88,
@@ -3057,7 +3154,8 @@
         "a",
         "c"
       ],
-      "explanation": "Good ensembles: different polynomial degrees, mix model types. Training on COMPLETE data without subsetting gives same model. IDENTICAL configs defeat the purpose. DIVERSITY is key."
+      "explanation": "Good ensembles: different polynomial degrees, mix model types. Training on COMPLETE data without subsetting gives same model. IDENTICAL configs defeat the purpose. DIVERSITY is key.",
+      "type": "multi-select"
     },
     {
       "id": 89,
@@ -3091,7 +3189,8 @@
         "b",
         "c"
       ],
-      "explanation": "Bagging: parallel, variance reduction, strong learners. Boosting: sequential, bias reduction, WEAK (not strong) learners. Not equally overfitting-resistant."
+      "explanation": "Bagging: parallel, variance reduction, strong learners. Boosting: sequential, bias reduction, WEAK (not strong) learners. Not equally overfitting-resistant.",
+      "type": "multi-select"
     },
     {
       "id": 90,
@@ -3126,7 +3225,8 @@
         "c",
         "e"
       ],
-      "explanation": "BagLearner wraps ANY base learner (DTLearner, RTLearner, LinRegLearner, etc.) with bagging. It creates bootstrap samples, trains base learners, and averages predictions. It is NOT limited to decision trees. More bags generally improve stability by better averaging out individual model variance."
+      "explanation": "BagLearner wraps ANY base learner (DTLearner, RTLearner, LinRegLearner, etc.) with bagging. It creates bootstrap samples, trains base learners, and averages predictions. It is NOT limited to decision trees. More bags generally improve stability by better averaging out individual model variance.",
+      "type": "multi-select"
     },
     {
       "id": 91,
@@ -3161,7 +3261,8 @@
         "c",
         "e"
       ],
-      "explanation": "Bagging: more models = smoother, more stable predictions without overfitting. Boosting: more models can overfit by focusing too much on specific hard examples (fitting noise). There ARE diminishing returns from bagging — after a certain point, adding more models provides minimal improvement."
+      "explanation": "Bagging: more models = smoother, more stable predictions without overfitting. Boosting: more models can overfit by focusing too much on specific hard examples (fitting noise). There ARE diminishing returns from bagging — after a certain point, adding more models provides minimal improvement.",
+      "type": "multi-select"
     },
     {
       "id": 92,
@@ -3193,7 +3294,8 @@
       "correctAnswers": [
         "a"
       ],
-      "explanation": "Overfitting: good training (LOW in-sample error), poor generalization (HIGH out-of-sample error). It means capturing NOISE (not undertrained). Out-of-sample error is generally >= in-sample. Overfitting affects ALL algorithms."
+      "explanation": "Overfitting: good training (LOW in-sample error), poor generalization (HIGH out-of-sample error). It means capturing NOISE (not undertrained). Out-of-sample error is generally >= in-sample. Overfitting affects ALL algorithms.",
+      "type": "multi-select"
     },
     {
       "id": 93,
@@ -3227,7 +3329,8 @@
         "b",
         "c"
       ],
-      "explanation": "K=1: perfect fit. More K = less overfit. K=N: predicts mean. Small K = LOW bias / HIGH variance (not high bias / low variance). Large K = high bias / low variance."
+      "explanation": "K=1: perfect fit. More K = less overfit. K=N: predicts mean. Small K = LOW bias / HIGH variance (not high bias / low variance). Large K = high bias / low variance.",
+      "type": "multi-select"
     },
     {
       "id": 94,
@@ -3262,7 +3365,8 @@
         "c",
         "e"
       ],
-      "explanation": "Higher d fits training data better (lower in-sample error). Out-of-sample error first decreases then increases as d grows (the U-shaped curve). A degree-N polynomial can perfectly fit N points. The overfitting range is where in-sample error drops but out-of-sample rises. Higher d does NOT always mean better performance — beyond an optimal point, it leads to overfitting."
+      "explanation": "Higher d fits training data better (lower in-sample error). Out-of-sample error first decreases then increases as d grows (the U-shaped curve). A degree-N polynomial can perfectly fit N points. The overfitting range is where in-sample error drops but out-of-sample rises. Higher d does NOT always mean better performance — beyond an optimal point, it leads to overfitting.",
+      "type": "multi-select"
     },
     {
       "id": 95,
@@ -3297,7 +3401,8 @@
         "c",
         "d"
       ],
-      "explanation": "Standard cross-validation creates K folds, rotating the test set. For time series, this can create lookahead bias (training on future, testing on past). Roll-forward fixes this by maintaining temporal order. Roll-forward with 5 slices produces only 4 unique splits (not 5), because each split uses one slice for training and the next for testing."
+      "explanation": "Standard cross-validation creates K folds, rotating the test set. For time series, this can create lookahead bias (training on future, testing on past). Roll-forward fixes this by maintaining temporal order. Roll-forward with 5 slices produces only 4 unique splits (not 5), because each split uses one slice for training and the next for testing.",
+      "type": "multi-select"
     },
     {
       "id": 96,
@@ -3329,7 +3434,8 @@
       "correctAnswers": [
         "a"
       ],
-      "explanation": "RMSE = sqrt(sum of squared errors / N). It gives an APPROXIMATION of average error (not exact per-point). Due to squaring, it EMPHASIZES larger errors (not treats equally). RMSE is in the SAME units as the target (not squared units). Lower training RMSE does not guarantee better unseen performance."
+      "explanation": "RMSE = sqrt(sum of squared errors / N). It gives an APPROXIMATION of average error (not exact per-point). Due to squaring, it EMPHASIZES larger errors (not treats equally). RMSE is in the SAME units as the target (not squared units). Lower training RMSE does not guarantee better unseen performance.",
+      "type": "multi-select"
     },
     {
       "id": 97,
@@ -3364,7 +3470,8 @@
         "c",
         "d"
       ],
-      "explanation": "leaf_size = 1 produces the most complex tree (overfitting risk). Increasing it makes trees shallower/more general. There's a sweet spot minimizing out-of-sample error. Too large = underfitting. leaf_size has a MAJOR effect on accuracy — it controls the bias-variance tradeoff, making it one of the most important hyperparameters."
+      "explanation": "leaf_size = 1 produces the most complex tree (overfitting risk). Increasing it makes trees shallower/more general. There's a sweet spot minimizing out-of-sample error. Too large = underfitting. leaf_size has a MAJOR effect on accuracy — it controls the bias-variance tradeoff, making it one of the most important hyperparameters.",
+      "type": "multi-select"
     },
     {
       "id": 98,
@@ -3399,7 +3506,8 @@
         "c",
         "d"
       ],
-      "explanation": "Correlation measures how well predictions track actuals, ranging from -1 to 1. Correlation of 1 = perfect. Generally, as RMSE increases, correlation decreases. However, high correlation does NOT guarantee low RMSE — the predictions could track the pattern perfectly but be systematically offset (shifted up/down), giving high correlation but high RMSE."
+      "explanation": "Correlation measures how well predictions track actuals, ranging from -1 to 1. Correlation of 1 = perfect. Generally, as RMSE increases, correlation decreases. However, high correlation does NOT guarantee low RMSE — the predictions could track the pattern perfectly but be systematically offset (shifted up/down), giving high correlation but high RMSE.",
+      "type": "multi-select"
     },
     {
       "id": 99,
@@ -3434,7 +3542,8 @@
         "c",
         "d"
       ],
-      "explanation": "High bias = underfitting (too simple). High variance = overfitting (too complex). Bagging reduces variance; boosting reduces bias. The goal is to balance both. It is generally NOT possible to achieve zero bias AND zero variance simultaneously — reducing one typically increases the other (the fundamental tradeoff)."
+      "explanation": "High bias = underfitting (too simple). High variance = overfitting (too complex). Bagging reduces variance; boosting reduces bias. The goal is to balance both. It is generally NOT possible to achieve zero bias AND zero variance simultaneously — reducing one typically increases the other (the fundamental tradeoff).",
+      "type": "multi-select"
     },
     {
       "id": 100,
@@ -3466,7 +3575,8 @@
       "correctAnswers": [
         "a"
       ],
-      "explanation": "Feature importance calculates ranks/scores. It REDUCES (not increases) inputs. RANDOM FOREST (not Logistic Regression) is recommended. It CONFIRMS (not contradicts) human intuition. The kitchen sink approach should be avoided."
+      "explanation": "Feature importance calculates ranks/scores. It REDUCES (not increases) inputs. RANDOM FOREST (not Logistic Regression) is recommended. It CONFIRMS (not contradicts) human intuition. The kitchen sink approach should be avoided.",
+      "type": "multi-select"
     },
     {
       "id": 101,
@@ -3476,7 +3586,7 @@
       "options": [
         {
           "id": "a",
-          "text": "Default scikit-learn importance is fast but biased toward continuous and high-cardinality features"
+          "text": "Mean Decrease in Impurity (MDI), scikit-learn's default feature importance, is fast but biased toward continuous and high-cardinality features"
         },
         {
           "id": "b",
@@ -3501,7 +3611,8 @@
         "c",
         "d"
       ],
-      "explanation": "Default sklearn: fast, biased. Permutation: shuffle feature, measure impact. Drop column: retrain without feature, most intuitive. SHAP: game-theory-based, shows direction, expensive. The four techniques do NOT produce identical results — they use fundamentally different methods and can disagree, especially for correlated features."
+      "explanation": "MDI (Mean Decrease in Impurity), scikit-learn's default: fast but biased toward continuous/high-cardinality features. Permutation: shuffle feature, measure impact. Drop column: retrain without feature, most intuitive. SHAP: game-theory-based, shows direction, expensive. The four techniques do NOT produce identical results — they use fundamentally different methods and can disagree, especially for correlated features.",
+      "type": "multi-select"
     },
     {
       "id": 102,
@@ -3534,7 +3645,8 @@
         "a",
         "c"
       ],
-      "explanation": "BERT reads bidirectionally. FinBERT IS finance-specific. NLP parses PM instructions. BERT needs few labeled examples for fine-tuning. NLP DOES help understand cost impacts."
+      "explanation": "BERT reads bidirectionally. FinBERT IS finance-specific. NLP parses PM instructions. BERT needs few labeled examples for fine-tuning. NLP DOES help understand cost impacts.",
+      "type": "multi-select"
     },
     {
       "id": 103,
@@ -3560,7 +3672,7 @@
         },
         {
           "id": "e",
-          "text": "Every ML model must undergo third-party peer review before production"
+          "text": "ML models used for trading should undergo independent peer review to catch issues like endogeneity and data bias before production"
         }
       ],
       "correctAnswers": [
@@ -3569,7 +3681,8 @@
         "c",
         "e"
       ],
-      "explanation": "Biased data → biased predictions. VWAP on large-caps only misrepresents costs for small-caps. Transparency requires documenting everything. All models need peer review. Neural networks are NOT transparent — they are explicitly described as 'black boxes' where explaining results is highly difficult, making them suboptimal for trading."
+      "explanation": "Biased data → biased predictions. VWAP on large-caps only misrepresents costs for small-caps. Transparency requires documenting everything. Independent peer review catches issues like endogeneity and data bias before production. Neural networks are NOT transparent — they are explicitly described as 'black boxes' where explaining results is highly difficult, making them suboptimal for trading.",
+      "type": "multi-select"
     },
     {
       "id": 104,
@@ -3604,7 +3717,8 @@
         "c",
         "d"
       ],
-      "explanation": "k-means: continuous. k-modes: categorical. k-prototype: both. Clustering groups similar orders to infer missing tags. Semisupervised learning uses a SMALL set of labeled data plus a LARGE set of unlabeled data — not only labeled data (that would be fully supervised)."
+      "explanation": "k-means: continuous. k-modes: categorical. k-prototype: both. Clustering groups similar orders to infer missing tags. Semisupervised learning uses a SMALL set of labeled data plus a LARGE set of unlabeled data — not only labeled data (that would be fully supervised).",
+      "type": "multi-select"
     },
     {
       "id": 105,
@@ -3639,7 +3753,8 @@
         "c",
         "e"
       ],
-      "explanation": "Endogeneity: a feature is controlled by the entity being measured (e.g., broker controls order horizon while the model evaluates brokers). Such features must be removed. Endogeneity is caught during peer review. Endogenous features may actually IMPROVE prediction accuracy (that's why they sneak through) — but they corrupt the model's intent and must be removed despite improving metrics."
+      "explanation": "Endogeneity: a feature is controlled by the entity being measured (e.g., broker controls order horizon while the model evaluates brokers). Such features must be removed. Endogeneity is caught during peer review. Endogenous features may actually IMPROVE prediction accuracy (that's why they sneak through) — but they corrupt the model's intent and must be removed despite improving metrics.",
+      "type": "multi-select"
     },
     {
       "id": 106,
@@ -3649,7 +3764,7 @@
       "options": [
         {
           "id": "a",
-          "text": "The majority of time should be spent cleansing and normalizing data"
+          "text": "The six-step framework identifies data cleansing and normalization as the most labor-intensive step"
         },
         {
           "id": "b",
@@ -3674,7 +3789,8 @@
         "c",
         "e"
       ],
-      "explanation": "Steps: (1) cleanse/normalize data (majority of time), (2) chunk data, (3) label and split, (4) select features, (5) choose model, (6) choose importance technique. The kitchen sink approach is explicitly warned AGAINST — using every variable creates noise and redundancy. Highly correlated inputs should be removed."
+      "explanation": "Steps: (1) cleanse/normalize data (the framework identifies this as the most labor-intensive step), (2) chunk data, (3) label and split, (4) select features, (5) choose model, (6) choose importance technique. The kitchen sink approach is explicitly warned AGAINST — using every variable creates noise and redundancy. Highly correlated inputs should be removed.",
+      "type": "multi-select"
     },
     {
       "id": 107,
@@ -3709,7 +3825,8 @@
         "c",
         "e"
       ],
-      "explanation": "Prescriptive models predict optimal trading algorithms using ticker, size, sector, and market data. They show expected costs across algorithms. Traders maintain the option to OVERRIDE recommendations using human intuition — they should NOT blindly follow the model. Overrides become training data for future model refinement (human-in-the-loop)."
+      "explanation": "Prescriptive models predict optimal trading algorithms using ticker, size, sector, and market data. They show expected costs across algorithms. Traders maintain the option to OVERRIDE recommendations using human intuition — they should NOT blindly follow the model. Overrides become training data for future model refinement (human-in-the-loop).",
+      "type": "multi-select"
     },
     {
       "id": 108,
@@ -3741,7 +3858,8 @@
       "correctAnswers": [
         "a"
       ],
-      "explanation": "Martingale: double bet after loss. With UNLIMITED bankroll: 100% success (not 66%). With $256 limit: ~65.7% (not 100%). Limited bankroll introduces risk of ruin. Expected value with limited bankroll is NEGATIVE (-$34.84), not guaranteed positive."
+      "explanation": "Martingale: double bet after loss. With UNLIMITED bankroll: 100% success (not 66%). With $256 limit: ~65.7% (not 100%). Limited bankroll introduces risk of ruin. Expected value with limited bankroll is NEGATIVE (-$34.84), not guaranteed positive.",
+      "type": "multi-select"
     },
     {
       "id": 109,
@@ -3776,7 +3894,8 @@
         "c",
         "d"
       ],
-      "explanation": "Unlimited bankroll: expected value = $80 target. Limited bankroll: negative expected value because catastrophic losses outweigh wins. The bankroll limit prevents recovery. Interestingly, the MEDIAN can be positive (most runs succeed) while the MEAN is negative (a few catastrophic failures drag it down). The strategy does NOT eliminate the house edge — it merely redistributes when losses occur."
+      "explanation": "Unlimited bankroll: expected value = $80 target. Limited bankroll: negative expected value because catastrophic losses outweigh wins. The bankroll limit prevents recovery. Interestingly, the MEDIAN can be positive (most runs succeed) while the MEAN is negative (a few catastrophic failures drag it down). The strategy does NOT eliminate the house edge — it merely redistributes when losses occur.",
+      "type": "multi-select"
     },
     {
       "id": 110,
@@ -3808,7 +3927,8 @@
       "correctAnswers": [
         "a"
       ],
-      "explanation": "Portfolio optimization maximizes Sharpe Ratio. In this project, weights are [0,1] LONG-ONLY (not negative). Weights sum to 1.0 (not 0.0). Optimizer iterates but is NOT guaranteed global optimum. Optimal portfolio is rarely equal-weighted."
+      "explanation": "Portfolio optimization maximizes Sharpe Ratio. In this project, weights are [0,1] LONG-ONLY (not negative). Weights sum to 1.0 (not 0.0). Optimizer iterates but is NOT guaranteed global optimum. Optimal portfolio is rarely equal-weighted.",
+      "type": "multi-select"
     },
     {
       "id": 111,
@@ -3843,7 +3963,8 @@
         "c",
         "d"
       ],
-      "explanation": "leaf_size=1 produces perfect training fit (RMSE≈0) but high out-of-sample error (overfitting). Increasing leaf_size reduces overfitting. Bagging with 20 bags significantly reduces variance (by ~64% in experiments) and improves out-of-sample RMSE, especially at small leaf sizes where individual trees overfit. leaf_size has a MAJOR impact on performance."
+      "explanation": "leaf_size=1 produces perfect training fit (RMSE≈0) but high out-of-sample error (overfitting). Increasing leaf_size reduces overfitting. Bagging with 20 bags significantly reduces variance (by ~64% in experiments) and improves out-of-sample RMSE, especially at small leaf sizes where individual trees overfit. leaf_size has a MAJOR impact on performance.",
+      "type": "multi-select"
     },
     {
       "id": 112,
@@ -3876,7 +3997,8 @@
         "a",
         "d"
       ],
-      "explanation": "DTLearner has better accuracy. RTLearner is FASTER (not slower). Both produce SIMILAR-sized trees. RTLearner uses random features. They don't produce identical results."
+      "explanation": "DTLearner has better accuracy. RTLearner is FASTER (not slower). Both produce SIMILAR-sized trees. RTLearner uses random features. They don't produce identical results.",
+      "type": "multi-select"
     },
     {
       "id": 113,
@@ -3910,7 +4032,8 @@
         "c",
         "d"
       ],
-      "explanation": "Non-linear data defeats linear regression. Regime changes/clusters defeat linear regression. Decision trees fail at extrapolation (flat prediction outside training range). Perfectly linear data does NOT defeat decision trees — they approximate it with step functions that can be reasonable, especially with enough data. More training data helps but CANNOT fully overcome fundamental model limitations (e.g., linear regression still can't fit non-linear data)."
+      "explanation": "Non-linear data defeats linear regression. Regime changes/clusters defeat linear regression. Decision trees fail at extrapolation (flat prediction outside training range). Perfectly linear data does NOT defeat decision trees — they approximate it with step functions that can be reasonable, especially with enough data. More training data helps but CANNOT fully overcome fundamental model limitations (e.g., linear regression still can't fit non-linear data).",
+      "type": "multi-select"
     },
     {
       "id": 114,
@@ -3945,7 +4068,8 @@
         "c",
         "e"
       ],
-      "explanation": "Survivor bias removes failed companies from databases, inflating backtest results. It's like the WWII plane analogy (only studying survivors). Testing only on current companies ignores failures. Survivor bias has a SIGNIFICANT (not negligible) impact — it's described as the 'most dangerous error in backtesting.'"
+      "explanation": "Survivor bias removes failed companies from databases, inflating backtest results. It's like the WWII plane analogy (only studying survivors). Testing only on current companies ignores failures. Survivor bias has a SIGNIFICANT (not negligible) impact — it's described as the 'most dangerous error in backtesting.'",
+      "type": "multi-select"
     },
     {
       "id": 115,
@@ -3980,7 +4104,8 @@
         "c",
         "d"
       ],
-      "explanation": "Stock splits reduce per-share price (increase shares). Without adjustment, algorithms see a 'crash.' Dividends cause ex-dividend date drops. Adjusted Close corrects for both. Corporate actions affect ALL historical data — prices must be retroactively adjusted (not just the event day) to maintain consistency for analysis and backtesting."
+      "explanation": "Stock splits reduce per-share price (increase shares). Without adjustment, algorithms see a 'crash.' Dividends cause ex-dividend date drops. Adjusted Close corrects for both. Corporate actions affect ALL historical data — prices must be retroactively adjusted (not just the event day) to maintain consistency for analysis and backtesting.",
+      "type": "multi-select"
     },
     {
       "id": 116,
@@ -4015,7 +4140,8 @@
         "d",
         "e"
       ],
-      "explanation": "Bagging reduced variance by ~64% and improved out-of-sample RMSE by ~31% at leaf_size=1. Benefits are most pronounced at small leaf sizes (where individual trees overfit). Bagging smooths via averaging. However, bagging does NOT eliminate the need for tuning leaf_size — it helps, but leaf_size still affects the optimal performance."
+      "explanation": "Bagging reduced variance by ~64% and improved out-of-sample RMSE by ~31% at leaf_size=1. Benefits are most pronounced at small leaf sizes (where individual trees overfit). Bagging smooths via averaging. However, bagging does NOT eliminate the need for tuning leaf_size — it helps, but leaf_size still affects the optimal performance.",
+      "type": "multi-select"
     },
     {
       "id": 117,
@@ -4050,7 +4176,888 @@
         "c",
         "e"
       ],
-      "explanation": "Backtesting evaluates strategies on historical data using rolling train/test windows. Performance is measured by Sharpe Ratio, returns, etc. Good backtesting results do NOT guarantee future performance — markets change, data may have survivor bias, and the strategy may have been overfit to historical patterns."
+      "explanation": "Backtesting evaluates strategies on historical data using rolling train/test windows. Performance is measured by Sharpe Ratio, returns, etc. Good backtesting results do NOT guarantee future performance — markets change, data may have survivor bias, and the strategy may have been overfit to historical patterns.",
+      "type": "multi-select"
+    },
+    {
+      "id": 118,
+      "type": "scenario",
+      "topic": "stock-data",
+      "difficulty": "medium",
+      "scenario": "You are a junior analyst at a quantitative fund tasked with building a backtesting pipeline. You have 10 years of daily OHLCV data from Yahoo Finance for a universe of 50 stocks. Several stocks had 2-for-1 stock splits during the period, and many paid quarterly dividends. Your manager asks you to prepare the data for a momentum-based strategy.",
+      "question": "Evaluate the following statements about preparing this data:",
+      "options": [
+        {
+          "id": "a",
+          "text": "You should use Adjusted Close rather than raw Close prices to ensure stock splits and dividends do not distort historical returns"
+        },
+        {
+          "id": "b",
+          "text": "SPY is a good choice for the date index reference because it trades on every market day, ensuring no trading dates are missed"
+        },
+        {
+          "id": "c",
+          "text": "When filling gaps from stocks that started trading mid-period, you should forward fill first, then backward fill for any remaining leading NaN values"
+        },
+        {
+          "id": "d",
+          "text": "Daily returns should be calculated as price[t] minus price[t-1] to get the dollar change per day"
+        },
+        {
+          "id": "e",
+          "text": "Stocks that were delisted during the 10-year period should be excluded from the dataset since they no longer trade"
+        }
+      ],
+      "correctAnswers": [
+        "a",
+        "b",
+        "c"
+      ],
+      "explanation": "Adjusted Close accounts for splits and dividends, making it essential for backtesting. SPY trades every market day and provides a reliable date index. Forward fill before backward fill is correct — forward fill handles mid-period gaps without lookahead bias, then backward fill covers leading NaNs. Daily returns use the ratio formula (price[t]/price[t-1] - 1), NOT subtraction — subtraction gives dollar change, not percentage return. Delisted stocks must be KEPT to avoid survivor bias."
+    },
+    {
+      "id": 119,
+      "type": "scenario",
+      "topic": "stock-data",
+      "difficulty": "hard",
+      "scenario": "Your backtest of a mean-reversion strategy shows a massive short signal on Stock XYZ on June 15, 2020, followed by a dramatic 'recovery' that generates apparent profits. Upon investigation, you discover XYZ underwent a 4-for-1 stock split on June 15. The raw Close price dropped from $400 to $100 overnight, but the Adjusted Close shows no discontinuity. Your colleague suggests several approaches to handle this issue.",
+      "question": "Which of the following statements are correct?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Using Adjusted Close prices would have prevented this false signal because the split is already factored into historical prices"
+        },
+        {
+          "id": "b",
+          "text": "The raw Close price dropped by 75% overnight due to the 4-for-1 split, but no actual value was lost by shareholders"
+        },
+        {
+          "id": "c",
+          "text": "Adjusted Close retroactively modifies ALL historical prices prior to the split, not just the split date itself"
+        },
+        {
+          "id": "d",
+          "text": "A 4-for-1 split means each shareholder now owns 4 times as many shares, each worth one-quarter of the pre-split price"
+        },
+        {
+          "id": "e",
+          "text": "Volume data does not need adjustment after a stock split since the number of transactions remains the same"
+        }
+      ],
+      "correctAnswers": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "explanation": "Adjusted Close eliminates split discontinuities by retroactively adjusting ALL historical prices (not just the split date). In a 4-for-1 split, shares quadruple and price quarters — no value change. Volume data DOES need adjustment after splits because the share count changes; raw volume before the split represents larger shares, making pre/post-split volume comparisons misleading without adjustment."
+    },
+    {
+      "id": 120,
+      "type": "scenario",
+      "topic": "portfolio-stats",
+      "difficulty": "medium",
+      "scenario": "You are evaluating three equity portfolios for a client. Portfolio A returned 15% annually with 20% volatility. Portfolio B returned 8% annually with 5% volatility. Portfolio C returned 25% annually with 40% volatility. The risk-free rate is 3% per year. Your client wants to understand which portfolio offered the best risk-adjusted performance.",
+      "question": "Consider the following statements:",
+      "options": [
+        {
+          "id": "a",
+          "text": "Portfolio A has the highest Sharpe Ratio of the three portfolios"
+        },
+        {
+          "id": "b",
+          "text": "Portfolio C has the highest absolute return but the lowest Sharpe Ratio"
+        },
+        {
+          "id": "c",
+          "text": "The Sharpe Ratio is calculated as (portfolio return - risk-free rate) / standard deviation of portfolio returns"
+        },
+        {
+          "id": "d",
+          "text": "Portfolio B's lower volatility makes it the safest choice regardless of the client's investment goals"
+        },
+        {
+          "id": "e",
+          "text": "A portfolio with a higher Sharpe Ratio always produces higher total returns than one with a lower Sharpe Ratio"
+        }
+      ],
+      "correctAnswers": [
+        "b",
+        "c"
+      ],
+      "explanation": "Sharpe Ratios: A = (15-3)/20 = 0.60, B = (8-3)/5 = 1.00, C = (25-3)/40 = 0.55. Portfolio B has the HIGHEST Sharpe Ratio (1.00), not A. Portfolio C has the highest return but lowest Sharpe (0.55). The Sharpe formula is correct (excess return / std dev). Lower volatility doesn't automatically make a portfolio 'best' — it depends on the client's risk tolerance and goals. Higher Sharpe does NOT mean higher total returns — B has the best Sharpe but the lowest return."
+    },
+    {
+      "id": 121,
+      "type": "scenario",
+      "topic": "portfolio-stats",
+      "difficulty": "hard",
+      "scenario": "You manage a fund that returned an average of 0.05% daily over the past year (252 trading days), with a daily standard deviation of 1.2%. The daily risk-free rate is approximately 0.01%. A competing fund returned 0.08% daily with a daily standard deviation of 3.0%. Your board asks you to compare both funds using the Sharpe Ratio and cumulative returns.",
+      "question": "Evaluate whether the following statements are true or false:",
+      "options": [
+        {
+          "id": "a",
+          "text": "Your fund's daily Sharpe Ratio is approximately 0.033, calculated as (0.05% - 0.01%) / 1.2%"
+        },
+        {
+          "id": "b",
+          "text": "To annualize the daily Sharpe Ratio, you multiply by the square root of 252, giving approximately 0.53 for your fund"
+        },
+        {
+          "id": "c",
+          "text": "The competing fund has a higher annualized Sharpe Ratio because its daily returns are higher"
+        },
+        {
+          "id": "d",
+          "text": "Cumulative return is calculated as the product of (1 + daily_return) for each day, minus 1 — not the sum of daily returns"
+        },
+        {
+          "id": "e",
+          "text": "Your fund likely has a higher cumulative return than the competing fund because it has a higher Sharpe Ratio"
+        }
+      ],
+      "correctAnswers": [
+        "a",
+        "b",
+        "d"
+      ],
+      "explanation": "Your daily Sharpe = (0.05-0.01)/1.2 = 0.033. Annualized = 0.033 * sqrt(252) = 0.53. Competitor daily Sharpe = (0.08-0.01)/3.0 = 0.023, annualized = 0.37 — LOWER than yours despite higher daily returns. Cumulative return uses the product formula, not summation, because returns compound. Your fund has a higher Sharpe but the competing fund likely has higher cumulative returns (0.08% vs 0.05% daily compounds to more) — Sharpe measures risk-adjusted performance, not absolute returns."
+    },
+    {
+      "id": 122,
+      "type": "scenario",
+      "topic": "market-mechanics",
+      "difficulty": "medium",
+      "scenario": "You are an institutional trader at a pension fund and need to buy 500,000 shares of a mid-cap stock that typically trades 200,000 shares per day. The current bid is $45.00 and the ask is $45.05. Your order is approximately 2.5 times the average daily volume. You are concerned about market impact.",
+      "question": "Which of the following assessments are correct?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A single market order for all 500,000 shares would likely move the price significantly against you because the order far exceeds available liquidity"
+        },
+        {
+          "id": "b",
+          "text": "Using a limit order at $45.05 guarantees you will acquire all 500,000 shares at that price"
+        },
+        {
+          "id": "c",
+          "text": "Breaking the order into smaller pieces executed over several days would help reduce market impact"
+        },
+        {
+          "id": "d",
+          "text": "The bid-ask spread of $0.05 represents the immediate cost of trading and compensates market makers for providing liquidity"
+        },
+        {
+          "id": "e",
+          "text": "Placing the entire order as a limit buy at $45.00 (the bid price) is the optimal strategy since it avoids paying the spread"
+        }
+      ],
+      "correctAnswers": [
+        "a",
+        "c",
+        "d"
+      ],
+      "explanation": "A 500,000 share market order (2.5x daily volume) would exhaust the order book and push the price up dramatically. Limit orders do NOT guarantee execution — the order may never fill if insufficient sellers exist at that price. Breaking into smaller pieces over time (TWAP/VWAP strategies) reduces market impact. The bid-ask spread is the cost of immediacy and compensates market makers. Placing a limit at the bid ($45.00) is NOT optimal — it may never execute, leaving the position unfilled while the stock potentially moves higher."
+    },
+    {
+      "id": 123,
+      "type": "scenario",
+      "topic": "market-mechanics",
+      "difficulty": "hard",
+      "scenario": "Your hedge fund identifies an arbitrage opportunity: Stock ABC trades at $50.00 on NYSE and $50.15 on NASDAQ simultaneously. You plan to short sell on NASDAQ and buy on NYSE to capture the $0.15 spread. Your risk manager raises several concerns about the execution. Additionally, another trader on your desk wants to short sell Stock DEF, which they believe is overvalued.",
+      "question": "Consider the following statements about these trades:",
+      "options": [
+        {
+          "id": "a",
+          "text": "The arbitrage profit of $0.15 per share is risk-free only if both legs execute simultaneously at the quoted prices"
+        },
+        {
+          "id": "b",
+          "text": "Short selling Stock DEF involves borrowing shares, selling them, and later buying them back — with theoretically unlimited loss potential if the price rises"
+        },
+        {
+          "id": "c",
+          "text": "The $0.15 cross-exchange price difference will likely persist for hours because markets are slow to adjust"
+        },
+        {
+          "id": "d",
+          "text": "Leverage is typically necessary for arbitrage strategies because the per-trade profit margins are very small"
+        },
+        {
+          "id": "e",
+          "text": "Between 80-90% of retail orders never reach the public exchanges like NYSE, instead being routed to dark pools or internalized by brokers"
+        }
+      ],
+      "correctAnswers": [
+        "a",
+        "b",
+        "d",
+        "e"
+      ],
+      "explanation": "Arbitrage is risk-free only if both legs execute simultaneously at quoted prices — execution risk is real. Short selling has unlimited loss potential because the stock price can theoretically rise without bound. Cross-exchange price differences are exploited by high-frequency traders in milliseconds, NOT hours. Leverage is essential for arbitrage since profit margins are tiny. The statistic about 80-90% of retail orders being routed away from public exchanges is accurate and was a key lecture point."
+    },
+    {
+      "id": 124,
+      "type": "scenario",
+      "topic": "hedge-funds",
+      "difficulty": "medium",
+      "scenario": "An emerging hedge fund manager pitches your endowment with the following terms: a '2 and 20' fee structure, $500 million AUM target, minimum $5 million investment, one-year lock-up period, and a long/short equity strategy focused on technology stocks. In Year 1, the fund earns a 30% gross return. In Year 2, the fund loses 10%.",
+      "question": "Evaluate the following statements about this fund:",
+      "options": [
+        {
+          "id": "a",
+          "text": "The '2 and 20' structure means the manager collects a 2% management fee on AUM regardless of whether the fund makes or loses money"
+        },
+        {
+          "id": "b",
+          "text": "In Year 1, the performance fee on $500M AUM would be 20% of the $150M profit, equaling $30M"
+        },
+        {
+          "id": "c",
+          "text": "The long/short equity strategy means the fund only profits when the technology sector goes up"
+        },
+        {
+          "id": "d",
+          "text": "The lock-up period prevents investors from withdrawing their capital for the specified duration, giving the manager more flexibility"
+        },
+        {
+          "id": "e",
+          "text": "In Year 2, the manager still collects the management fee but no performance fee since the fund lost money"
+        }
+      ],
+      "correctAnswers": [
+        "a",
+        "b",
+        "d",
+        "e"
+      ],
+      "explanation": "The 2% management fee is charged on AUM regardless of performance. Year 1 performance fee: 20% * ($500M * 30%) = $30M. Long/short equity can profit in any market — the short positions profit when stocks decline, so the fund does NOT require the sector to go up. Lock-up periods restrict withdrawals, giving managers flexibility for illiquid positions. In Year 2, the management fee (2% on AUM) is still collected, but no performance fee applies since there were no profits."
+    },
+    {
+      "id": 125,
+      "type": "scenario",
+      "topic": "hedge-funds",
+      "difficulty": "hard",
+      "scenario": "As a fund-of-funds manager, you are comparing two hedge fund strategies for allocation. Fund X employs a long/short equity strategy with a portfolio beta of 0.1 and historically generates alpha of 3% annually. Fund Y employs an event-driven merger arbitrage strategy, buying Company B at $40 after Company A announced an acquisition at $50/share. Your CIO asks you to evaluate both funds' risk characteristics.",
+      "question": "Which of the following statements are correct?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Fund X's low portfolio beta of 0.1 means it has very little exposure to broad market movements, making most of its returns dependent on stock-picking skill (alpha)"
+        },
+        {
+          "id": "b",
+          "text": "Fund Y's merger arbitrage profit comes from the $10 spread between the current trading price ($40) and the announced acquisition price ($50)"
+        },
+        {
+          "id": "c",
+          "text": "Fund X sells alpha — the excess return generated through the manager's skill beyond what is explained by market exposure"
+        },
+        {
+          "id": "d",
+          "text": "All hedge fund strategies are inherently market-neutral, meaning they have zero exposure to broad market movements"
+        },
+        {
+          "id": "e",
+          "text": "The fund-of-funds structure adds an additional layer of fees, meaning investors pay fees to both the fund-of-funds manager and the underlying hedge fund managers"
+        }
+      ],
+      "correctAnswers": [
+        "a",
+        "b",
+        "c",
+        "e"
+      ],
+      "explanation": "Fund X's beta of 0.1 means minimal market exposure — returns are driven primarily by alpha (stock selection skill). The merger arb spread ($50 - $40 = $10) is the potential profit, contingent on the deal closing. Hedge funds sell alpha (skill-based excess returns). NOT all strategies are market-neutral — momentum and directional strategies explicitly take market bets. Fund-of-funds investors do pay double fees (the FoF layer plus underlying fund fees)."
+    },
+    {
+      "id": 126,
+      "type": "scenario",
+      "topic": "valuation",
+      "difficulty": "medium",
+      "scenario": "You are analyzing a mature utility company that pays a stable $3 annual dividend expected to grow at 2% per year indefinitely. The appropriate discount rate for this company is 8%. The company's balance sheet shows total assets of $10 billion, intangible assets of $2 billion, and total liabilities of $6 billion. The stock currently trades at $55 per share with 100 million shares outstanding.",
+      "question": "Consider the following valuation statements:",
+      "options": [
+        {
+          "id": "a",
+          "text": "Using the Gordon Growth Model, the intrinsic value per share is $50, calculated as D1/(r-g) = $3/(0.08-0.02)"
+        },
+        {
+          "id": "b",
+          "text": "The book value of the company is $2 billion, calculated as Total Assets minus Total Liabilities minus Intangible Assets"
+        },
+        {
+          "id": "c",
+          "text": "The market capitalization is $5.5 billion, calculated as share price times shares outstanding"
+        },
+        {
+          "id": "d",
+          "text": "Since the stock trades at $55 but intrinsic value is $50, the stock appears overvalued by the DCF approach"
+        },
+        {
+          "id": "e",
+          "text": "Book value perfectly reflects a company's true market value because it is based on audited financial statements"
+        }
+      ],
+      "correctAnswers": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "explanation": "Gordon Growth Model: V0 = $3/(0.08-0.02) = $3/0.06 = $50 per share. Book value = $10B - $2B - $6B = $2B. Market cap = $55 * 100M = $5.5B. The stock at $55 exceeds the $50 intrinsic value, suggesting overvaluation. Book value does NOT reflect true market value — it uses historical cost, ignores brand value, intellectual property, and market conditions."
+    },
+    {
+      "id": 127,
+      "type": "scenario",
+      "topic": "valuation",
+      "difficulty": "hard",
+      "scenario": "During a market downturn, the overall market dropped 15%. Stock PQR, which has a CAPM beta of 1.5 and typically generates alpha of 1% per quarter, dropped 20%. The risk-free rate is 2% annually. Your portfolio manager wants to evaluate whether PQR performed better or worse than CAPM would predict, and whether to take a long position based on CAPM analysis.",
+      "question": "Evaluate the following assessments:",
+      "options": [
+        {
+          "id": "a",
+          "text": "According to CAPM, PQR's expected return given the market drop would be: R_f + beta * (R_m - R_f) = 2% + 1.5 * (-15% - 2%) = -23.5%"
+        },
+        {
+          "id": "b",
+          "text": "Since PQR only dropped 20% while CAPM predicted -23.5%, the stock actually outperformed its CAPM expectation"
+        },
+        {
+          "id": "c",
+          "text": "A beta of 1.5 means PQR is expected to amplify market movements — rising 1.5x more in up markets and falling 1.5x more in down markets"
+        },
+        {
+          "id": "d",
+          "text": "On the Security Market Line, PQR would appear above the line because it delivered better returns than CAPM predicted"
+        },
+        {
+          "id": "e",
+          "text": "CAPM guarantees that stocks with positive historical alpha will continue to generate alpha in future periods"
+        }
+      ],
+      "correctAnswers": [
+        "b",
+        "c",
+        "d"
+      ],
+      "explanation": "The CAPM expected return calculation should use excess market return: E(R) = Rf + beta*(Rm - Rf) = 2% + 1.5*(-15% - 2%) = 2% + 1.5*(-17%) = 2% - 25.5% = -23.5%. However, this applies to ANNUALIZED rates. For the period's actual return: if we compute simply, CAPM predicts approximately -23.5% and PQR dropped only -20%, meaning it outperformed. Beta of 1.5 means 1.5x amplification of market moves. On the SML, stocks performing better than predicted plot ABOVE the line (positive alpha). CAPM does NOT guarantee future alpha — alpha is considered random noise in the CAPM framework."
+    },
+    {
+      "id": 128,
+      "type": "scenario",
+      "topic": "technical-analysis",
+      "difficulty": "medium",
+      "scenario": "You are a quantitative trader monitoring Stock LMN. The stock's 20-day SMA is $100. The upper Bollinger Band is $108 and the lower band is $92. Yesterday the stock price was $91 (below the lower band). Today the price rose to $93 (above the lower band). The 10-day momentum is -0.15. Your trading system uses Bollinger Band crossovers and momentum as inputs.",
+      "question": "Consider the following statements about this situation:",
+      "options": [
+        {
+          "id": "a",
+          "text": "The Bollinger Bands are placed at $100 plus or minus two standard deviations, meaning the 20-day rolling standard deviation of price is $4"
+        },
+        {
+          "id": "b",
+          "text": "The price crossing from below to above the lower Bollinger Band is a buy signal, as it suggests the price is reverting toward the mean"
+        },
+        {
+          "id": "c",
+          "text": "The negative momentum of -0.15 means the stock price is 15% lower than it was 10 days ago"
+        },
+        {
+          "id": "d",
+          "text": "Individual technical indicators like Bollinger Bands are strong predictors on their own and do not need to be combined with other indicators"
+        },
+        {
+          "id": "e",
+          "text": "Technical analysis is generally more valuable over shorter trading horizons than over longer ones"
+        }
+      ],
+      "correctAnswers": [
+        "a",
+        "b",
+        "c",
+        "e"
+      ],
+      "explanation": "Bollinger Bands = SMA ± 2*std. Since upper band is $108 and SMA is $100, 2*std = $8, so std = $4. Price crossing from outside to inside the lower band IS a buy signal (mean reversion). Momentum of -0.15 means price is 15% lower than 10 days ago (m = p_t/p_{t-n} - 1). Individual indicators are WEAKLY predictive — combining 3-5 indicators provides much stronger signals. Technical analysis is more valuable over shorter horizons."
+    },
+    {
+      "id": 129,
+      "type": "scenario",
+      "topic": "technical-analysis",
+      "difficulty": "hard",
+      "scenario": "Your algorithmic trading system generates the following signals for Stock GHI: The 20-day SMA is $50 and the current price is $52 (price above SMA). The Bollinger Band ratio r = (price - SMA) / BB is 0.6 yesterday and 0.4 today. The 5-day momentum is +0.08. You need to decide whether to buy, sell, or hold based on these indicators. The system requires normalizing all indicators before feeding them to an ML model.",
+      "question": "Evaluate the following statements:",
+      "options": [
+        {
+          "id": "a",
+          "text": "Since the price ($52) is above the SMA ($50), the SMA indicator alone suggests a sell signal because the stock appears overvalued relative to its moving average"
+        },
+        {
+          "id": "b",
+          "text": "The Bollinger Band ratio declining from 0.6 to 0.4 does NOT trigger a sell signal because a sell signal requires the ratio to cross from above 1.0 to below 1.0"
+        },
+        {
+          "id": "c",
+          "text": "Normalization transforms each indicator using the formula (values - mean) / standard_deviation, centering them around 0"
+        },
+        {
+          "id": "d",
+          "text": "Without normalization, an ML model might overweight the P/E ratio (range 1-300) compared to momentum (range -0.5 to 0.5) simply because of the larger numerical scale"
+        },
+        {
+          "id": "e",
+          "text": "Positive momentum of +0.08 means the stock has gained 8% over the past 5 days, which typically indicates a long-term buy-and-hold opportunity"
+        }
+      ],
+      "correctAnswers": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "explanation": "When price > SMA, the SMA/price ratio is negative (SMA/price - 1 < 0), indicating a sell signal. The BB ratio moved from 0.6 to 0.4, staying well below 1.0 — a sell signal requires crossing from above 1.0 to below 1.0. Normalization uses the z-score formula (values - mean)/std. Without normalization, features with larger ranges dominate ML models. Momentum of +0.08 means an 8% gain, but technical analysis is better for SHORT-TERM trading, not long-term buy-and-hold."
+    },
+    {
+      "id": 130,
+      "type": "scenario",
+      "topic": "regression",
+      "difficulty": "medium",
+      "scenario": "Your team is building a linear regression model to predict next-day stock returns using three features: yesterday's return, 10-day momentum, and the Bollinger Band ratio. After training on 2 years of daily data, the model equation is: predicted_return = 0.002 + 0.15*momentum - 0.08*BB_ratio + 0.03*yesterday_return. The model's R-squared on training data is 0.05.",
+      "question": "Consider the following statements about this model:",
+      "options": [
+        {
+          "id": "a",
+          "text": "An R-squared of 0.05 means the model explains only 5% of the variance in daily returns, which is typical for noisy financial data"
+        },
+        {
+          "id": "b",
+          "text": "The negative coefficient on BB_ratio (-0.08) suggests that when the price is above the upper Bollinger Band, expected returns are lower (mean reversion effect)"
+        },
+        {
+          "id": "c",
+          "text": "Linear regression is a parametric method because it assumes a specific functional form (linear relationship) for the data"
+        },
+        {
+          "id": "d",
+          "text": "This model can predict returns outside the range seen in training data because linear regression can extrapolate along the fitted line"
+        },
+        {
+          "id": "e",
+          "text": "Adding more features will always improve the model's out-of-sample prediction accuracy"
+        }
+      ],
+      "correctAnswers": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "explanation": "R-squared of 0.05 is realistic for daily return prediction — financial data is extremely noisy. The negative BB_ratio coefficient captures mean reversion (high BB ratio = price far above SMA = expected decline). Linear regression IS parametric (assumes linear form). Unlike decision trees, linear regression CAN extrapolate. Adding more features does NOT always improve out-of-sample accuracy — it can lead to overfitting, especially with correlated or irrelevant features."
+    },
+    {
+      "id": 131,
+      "type": "scenario",
+      "topic": "regression",
+      "difficulty": "hard",
+      "scenario": "You are comparing KNN regression (K=3) and linear regression for predicting trading costs based on order size, volatility, and spread. Your dataset has 500 observations and 3 features. On training data, KNN achieves RMSE of 0.002 while linear regression achieves 0.008. On test data, KNN achieves 0.007 and linear regression achieves 0.009. A colleague suggests increasing the feature set to 50 variables.",
+      "question": "Evaluate the following statements:",
+      "options": [
+        {
+          "id": "a",
+          "text": "KNN's much lower training RMSE (0.002 vs 0.008) combined with higher test RMSE (0.007) relative to its training error suggests KNN is overfitting more than linear regression"
+        },
+        {
+          "id": "b",
+          "text": "With K=3, KNN averages the y-values (not x-values) of the 3 nearest neighbors to make each prediction"
+        },
+        {
+          "id": "c",
+          "text": "Expanding from 3 to 50 features would likely hurt KNN more than linear regression due to the Curse of Dimensionality"
+        },
+        {
+          "id": "d",
+          "text": "KNN requires normalizing the input features because it relies on distance calculations, whereas linear regression does not strictly require normalization"
+        },
+        {
+          "id": "e",
+          "text": "Increasing K from 3 to 100 would increase KNN's variance and decrease its bias"
+        }
+      ],
+      "correctAnswers": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "explanation": "KNN's training error is 0.002 but test error jumps to 0.007 (3.5x increase), while linear regression goes from 0.008 to 0.009 — KNN is clearly overfitting more. KNN averages the Y-values of neighbors. With 50 features and only 500 observations, the Curse of Dimensionality makes 'nearest' neighbors far away, devastating KNN while linear regression handles high dimensions better. KNN needs normalization for distance calculations. Increasing K DECREASES variance and INCREASES bias (smoother predictions) — the statement has it backwards."
+    },
+    {
+      "id": 132,
+      "type": "scenario",
+      "topic": "decision-trees",
+      "difficulty": "medium",
+      "scenario": "You are using a Decision Tree Learner (DTLearner) to predict whether a stock trade execution was 'good' or 'poor' based on features like order size, market volatility, time of day, and bid-ask spread. The tree has been built using a greedy recursive algorithm that selects the best split feature at each node based on correlation with the target variable.",
+      "question": "Which of the following statements about this Decision Tree are correct?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The algorithm selects split features by computing the absolute Pearson correlation between each feature and the target, choosing the feature with the highest absolute correlation"
+        },
+        {
+          "id": "b",
+          "text": "The data is split at each node using the median of the selected feature, sending values at or below the median to the left branch and values above to the right"
+        },
+        {
+          "id": "c",
+          "text": "The greedy approach means each split is locally optimal, but the overall tree structure is guaranteed to be globally optimal"
+        },
+        {
+          "id": "d",
+          "text": "Leaf nodes in a regression tree contain the mean of the target values for all data points that reached that leaf"
+        },
+        {
+          "id": "e",
+          "text": "Decision trees process each feature independently during splits, which means they do not require input feature normalization"
+        }
+      ],
+      "correctAnswers": [
+        "a",
+        "b",
+        "d",
+        "e"
+      ],
+      "explanation": "The correlation method uses absolute Pearson correlation |r| to select features. Splitting at the median ensures balanced trees. Greedy algorithms are NOT guaranteed to find the global optimum — they make locally optimal choices at each step. Regression tree leaves contain the mean of target values. Decision trees evaluate features independently (e.g., 'is feature > threshold?'), so normalization is unnecessary."
+    },
+    {
+      "id": 133,
+      "type": "scenario",
+      "topic": "decision-trees",
+      "difficulty": "hard",
+      "scenario": "You trained a DTLearner on financial data with leaf_size=1 and observe: in-sample RMSE = 0.0000, out-of-sample RMSE = 0.0077. You then retrain with leaf_size=10 and observe: in-sample RMSE = 0.0048, out-of-sample RMSE = 0.0064. Your manager asks why the model with perfect training accuracy performs worse on new data, and whether a Decision Tree or Linear Regression would be better for predicting values beyond the historical range.",
+      "question": "Evaluate the following statements:",
+      "options": [
+        {
+          "id": "a",
+          "text": "The leaf_size=1 model has zero training error because each data point gets its own leaf, perfectly memorizing the training set including its noise"
+        },
+        {
+          "id": "b",
+          "text": "Increasing leaf_size from 1 to 10 acts as regularization — averaging more points per leaf smooths out noise and improves generalization"
+        },
+        {
+          "id": "c",
+          "text": "The gap between in-sample and out-of-sample RMSE (0.0077 for leaf_size=1 vs. 0.0016 for leaf_size=10) indicates leaf_size=1 is severely overfitting"
+        },
+        {
+          "id": "d",
+          "text": "Decision trees can effectively predict values outside the range of the training data because they learn the underlying mathematical relationship"
+        },
+        {
+          "id": "e",
+          "text": "Linear regression would be better for extrapolation because it fits a global equation that extends naturally beyond the training range"
+        }
+      ],
+      "correctAnswers": [
+        "a",
+        "b",
+        "c",
+        "e"
+      ],
+      "explanation": "leaf_size=1 gives each point its own leaf (zero training error, maximum overfitting). Larger leaf_size acts as regularization by averaging multiple points. The variance gap (IS vs OOS error) is much larger for leaf_size=1, confirming overfitting. Decision trees CANNOT extrapolate — predictions are bounded by leaf values (lookup table analogy). Linear regression CAN extrapolate because its global equation extends beyond training data range."
+    },
+    {
+      "id": 134,
+      "type": "scenario",
+      "topic": "ensemble-methods",
+      "difficulty": "medium",
+      "scenario": "Your team has a single Decision Tree model (leaf_size=1) that perfectly fits the training data but performs poorly on test data. A colleague suggests using Bagging with 20 trees to improve performance. Each bag is created by sampling the training data with replacement, and the final prediction is the average of all 20 trees' predictions.",
+      "question": "Consider the following statements about the proposed bagging approach:",
+      "options": [
+        {
+          "id": "a",
+          "text": "Bootstrap sampling with replacement means each bag is the same size as the original dataset, but some rows may appear multiple times while others are excluded"
+        },
+        {
+          "id": "b",
+          "text": "Bagging reduces variance by averaging predictions from trees trained on slightly different subsets of data, causing individual errors to cancel out"
+        },
+        {
+          "id": "c",
+          "text": "The final bagged prediction is the mean of all 20 individual tree predictions for regression tasks"
+        },
+        {
+          "id": "d",
+          "text": "Bagging primarily works by reducing the bias of the individual Decision Tree models"
+        },
+        {
+          "id": "e",
+          "text": "Even with bagging, the individual trees can still overfit their respective bootstrapped datasets — but the averaging effect smooths this out"
+        }
+      ],
+      "correctAnswers": [
+        "a",
+        "b",
+        "c",
+        "e"
+      ],
+      "explanation": "Bootstrap sampling creates bags of the same size with replacement — some rows repeat, others are excluded. Bagging reduces VARIANCE (not bias) by averaging multiple noisy models so errors cancel out. The final prediction is the mean for regression. Bagging does NOT reduce bias — it reduces variance. Individual trees can still overfit their bootstrapped data, but averaging 20 diverse predictions produces a smoother, more stable result."
+    },
+    {
+      "id": 135,
+      "type": "scenario",
+      "topic": "ensemble-methods",
+      "difficulty": "hard",
+      "scenario": "You are building an ensemble model for predicting transaction costs. You compare two approaches: (1) A Random Forest with 50 trees where each node considers a random subset of features, and (2) AdaBoost with 50 sequential weak learners where each subsequent learner focuses on the examples the previous learners got wrong. Your dataset has one dominant feature (trade horizon) that explains 30% of variance on its own.",
+      "question": "Evaluate the following statements:",
+      "options": [
+        {
+          "id": "a",
+          "text": "In standard bagging, all 50 trees would likely split on trade_horizon at the root because the algorithm always picks the best feature — making the trees highly correlated"
+        },
+        {
+          "id": "b",
+          "text": "Random Forest forces diversity by restricting each node to a random subset of features, meaning some trees must find splits WITHOUT trade_horizon, decorrelating the ensemble"
+        },
+        {
+          "id": "c",
+          "text": "AdaBoost trains sequentially, reweighting data so that misclassified examples have higher probability of being selected in the next round"
+        },
+        {
+          "id": "d",
+          "text": "Bagging (including Random Forests) reduces variance, while boosting (AdaBoost) primarily reduces bias"
+        },
+        {
+          "id": "e",
+          "text": "AdaBoost is less prone to overfitting than Random Forests because it focuses on hard examples"
+        }
+      ],
+      "correctAnswers": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "explanation": "With a dominant feature, standard bagging produces correlated trees that all split on it first — averaging near-identical trees doesn't reduce variance. Random Forests fix this by restricting available features at each node, forcing diversity. AdaBoost is sequential, upweighting misclassified examples. Bagging reduces variance; boosting reduces bias. AdaBoost is actually MORE prone to overfitting (not less) because its focus on hard examples can fit noise, especially with many rounds."
+    },
+    {
+      "id": 136,
+      "type": "scenario",
+      "topic": "overfitting",
+      "difficulty": "medium",
+      "scenario": "You built a neural network to predict stock returns. On the training set of 5 years of data, it achieves 99% directional accuracy (correctly predicting up/down). On a held-out test set of 1 year, it achieves only 52% accuracy — barely better than random. Your manager is frustrated and suggests adding more features and training for more epochs.",
+      "question": "Consider the following statements about this situation:",
+      "options": [
+        {
+          "id": "a",
+          "text": "The large gap between 99% training accuracy and 52% test accuracy is a classic symptom of overfitting — the model memorized training noise rather than learning the underlying signal"
+        },
+        {
+          "id": "b",
+          "text": "Adding more features is likely to worsen the problem because it increases model complexity and gives the model more dimensions of noise to memorize"
+        },
+        {
+          "id": "c",
+          "text": "Training for more epochs would likely help the model generalize better by giving it more time to find the true underlying patterns"
+        },
+        {
+          "id": "d",
+          "text": "Reducing model complexity (fewer layers/neurons), using regularization, or increasing leaf_size (for tree models) are standard remedies for overfitting"
+        },
+        {
+          "id": "e",
+          "text": "Out-of-sample testing is essential because in-sample error alone cannot reveal whether a model has overfit"
+        }
+      ],
+      "correctAnswers": [
+        "a",
+        "b",
+        "d",
+        "e"
+      ],
+      "explanation": "The 99% vs 52% gap is textbook overfitting. Adding more features increases complexity and worsens overfitting. More training epochs would make overfitting WORSE — the model would memorize training data even more thoroughly. Reducing complexity and adding regularization are standard overfitting remedies. In-sample error always decreases with complexity, so only out-of-sample testing reveals overfitting."
+    },
+    {
+      "id": 137,
+      "type": "scenario",
+      "topic": "overfitting",
+      "difficulty": "hard",
+      "scenario": "You are using roll-forward cross-validation to evaluate a KNN model (K=3) on 5 years of daily financial data. The data is split into 5 annual slices. You train on slice 1, test on slice 2; train on slice 2, test on slice 3; and so on. The RMSE values across the 4 test folds are: 0.015, 0.042, 0.018, 0.038. The variance across folds is notably high.",
+      "question": "Evaluate the following statements:",
+      "options": [
+        {
+          "id": "a",
+          "text": "Roll-forward cross-validation preserves temporal ordering, which is critical for financial data to avoid lookahead bias"
+        },
+        {
+          "id": "b",
+          "text": "The high variance in RMSE across folds (ranging from 0.015 to 0.042) suggests the model is sensitive to which time period it encounters — indicating high model variance"
+        },
+        {
+          "id": "c",
+          "text": "Increasing K from 3 to a larger value would likely reduce this cross-fold variance because averaging more neighbors produces more stable predictions"
+        },
+        {
+          "id": "d",
+          "text": "With 5 annual slices in roll-forward validation, there are 5 train-test splits, not 4"
+        },
+        {
+          "id": "e",
+          "text": "If randomly shuffling the data (ignoring time order) produced consistently lower RMSE, this would suggest the temporal model is better for real-world deployment"
+        }
+      ],
+      "correctAnswers": [
+        "a",
+        "b",
+        "c"
+      ],
+      "explanation": "Roll-forward preserves time ordering — essential for financial data. High RMSE variance across folds indicates the model is unstable (high variance). Larger K reduces variance (smoother predictions). With 5 slices, roll-forward produces 4 splits (train on 1/test on 2, train on 2/test on 3, train on 3/test on 4, train on 4/test on 5). If random shuffling gives lower RMSE, it is due to lookahead bias — the model is 'cheating' by seeing future data during training, so it would perform WORSE in real deployment, not better."
+    },
+    {
+      "id": 138,
+      "type": "scenario",
+      "topic": "ml-finance",
+      "difficulty": "medium",
+      "scenario": "You are designing a new ML-based trading strategy for a hedge fund. The strategy will use supervised learning to predict short-term price movements, unsupervised learning to detect market regime changes, and reinforcement learning to optimize position sizing. Your team needs to construct the training data and select appropriate algorithms.",
+      "question": "Consider the following statements about this strategy:",
+      "options": [
+        {
+          "id": "a",
+          "text": "Supervised learning requires labeled training examples — pairs of (features, target) such as (technical indicators at day t, return at day t+5)"
+        },
+        {
+          "id": "b",
+          "text": "Unsupervised learning can identify hidden market regimes (e.g., high-volatility vs. low-volatility clusters) without needing pre-labeled regime categories"
+        },
+        {
+          "id": "c",
+          "text": "Reinforcement learning can learn an optimal trading policy by receiving rewards (positive returns) and penalties (losses) from its actions over time"
+        },
+        {
+          "id": "d",
+          "text": "Combining supervised and unsupervised learning improves robustness by leveraging prediction from labeled data alongside pattern discovery from unlabeled data"
+        },
+        {
+          "id": "e",
+          "text": "The strategy should rely solely on reinforcement learning since it can adapt to any market condition without needing historical labeled data"
+        }
+      ],
+      "correctAnswers": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "explanation": "Supervised learning needs labeled (X, Y) pairs. Unsupervised learning discovers patterns without labels — perfect for regime detection. RL learns policies through reward signals. Combining approaches leverages complementary strengths. Relying SOLELY on RL is unwise — RL alone struggles with noisy financial data, requires enormous training, and benefits from supervised/unsupervised preprocessing to identify features and regimes."
+    },
+    {
+      "id": 139,
+      "type": "scenario",
+      "topic": "ml-finance",
+      "difficulty": "hard",
+      "scenario": "Your firm's TCA (Transaction Cost Analysis) team built a Random Forest model to identify the most important features driving trading costs. The model outputs feature importance weights: trade_horizon (0.29), traded_value (0.17), historical_volatility (0.17), spread (0.15), sector (0.12), country (0.00). A peer reviewer notices that the broker's 'order_horizon' feature was also included and improves model accuracy significantly.",
+      "question": "Evaluate the following statements:",
+      "options": [
+        {
+          "id": "a",
+          "text": "Feature importance reduces the number of inputs a trader must consider, cutting through the noise of dozens of metrics to identify the key cost drivers"
+        },
+        {
+          "id": "b",
+          "text": "The 'country' feature having zero importance means it has no predictive power for transaction costs in this specific model configuration"
+        },
+        {
+          "id": "c",
+          "text": "The 'order_horizon' feature should be removed because the broker controls it — making it endogenous and corrupting the model's ability to evaluate broker performance"
+        },
+        {
+          "id": "d",
+          "text": "SHAP values provide more detail than default feature importance because they show the direction of each feature's impact, not just its magnitude"
+        },
+        {
+          "id": "e",
+          "text": "Using every available variable (the 'kitchen sink' approach) is recommended because more features always improve Random Forest accuracy"
+        }
+      ],
+      "correctAnswers": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "explanation": "Feature importance identifies key drivers from many variables. Zero importance means no predictive power. Endogenous features (controlled by the entity being evaluated) must be removed — if the broker controls order_horizon, including it corrupts the evaluation. SHAP values show impact direction and magnitude. The 'kitchen sink' approach is NOT recommended — highly correlated or irrelevant features add noise, increase computation, and can degrade model performance."
+    },
+    {
+      "id": 140,
+      "type": "scenario",
+      "topic": "projects",
+      "difficulty": "medium",
+      "scenario": "You are simulating the Martingale roulette strategy in a casino setting. The strategy works as follows: bet $1 on black. If you lose, double your bet; if you win, reset to $1. Your goal is to reach $80 in winnings starting from $0. You run 1,000 simulations — first with an unlimited bankroll, then with a $256 bankroll limit (you cannot bet more than you have).",
+      "question": "Consider the following statements about the simulation results:",
+      "options": [
+        {
+          "id": "a",
+          "text": "With an unlimited bankroll, the Martingale strategy reaches the $80 target in 100% of simulations because you can always double your bet after a loss"
+        },
+        {
+          "id": "b",
+          "text": "With a $256 bankroll limit, the success rate drops significantly because a streak of consecutive losses can exhaust the bankroll before a win recovers the losses"
+        },
+        {
+          "id": "c",
+          "text": "With a $256 limit, the expected value of winnings is positive because the strategy is mathematically sound"
+        },
+        {
+          "id": "d",
+          "text": "The standard deviation of winnings with an unlimited bankroll is $0 because every simulation reaches exactly $80"
+        },
+        {
+          "id": "e",
+          "text": "The Martingale strategy demonstrates that with proper position sizing, any negative-expectation game can be turned into a profitable one"
+        }
+      ],
+      "correctAnswers": [
+        "a",
+        "b",
+        "d"
+      ],
+      "explanation": "With unlimited bankroll, Martingale always eventually wins (100% success, std dev = $0). With a $256 limit, roughly 34% of simulations lose the entire bankroll, dropping success rate to ~66%. The expected value with a limited bankroll is NEGATIVE (approximately -$35) because the large losses from bankroll exhaustion outweigh the $80 gains. Martingale does NOT turn negative-expectation games profitable — it just changes the distribution of outcomes (many small wins, rare catastrophic losses)."
+    },
+    {
+      "id": 141,
+      "type": "scenario",
+      "topic": "projects",
+      "difficulty": "hard",
+      "scenario": "You ran experiments comparing DTLearner and BagLearner (with 20 bags of DTLearner) on a financial dataset. Results: DTLearner at leaf_size=1 has IS RMSE=0.0000 and OOS RMSE=0.0077. BagLearner at leaf_size=1 has IS RMSE=0.0026 and OOS RMSE=0.0053. At the optimal leaf_size=10, DTLearner achieves OOS RMSE=0.0064 while BagLearner achieves OOS RMSE=0.0052.",
+      "question": "Evaluate the following conclusions from these experiments:",
+      "options": [
+        {
+          "id": "a",
+          "text": "DTLearner at leaf_size=1 achieves zero training error because each data point gets its own leaf, but the 0.0077 OOS RMSE reveals severe overfitting"
+        },
+        {
+          "id": "b",
+          "text": "BagLearner at leaf_size=1 reduces the overfitting gap from 0.0077 (single tree) to 0.0027 (bagged), demonstrating that bagging reduces variance through averaging"
+        },
+        {
+          "id": "c",
+          "text": "Bagging improved the best achievable OOS RMSE from 0.0064 (DTLearner optimal) to 0.0052 (BagLearner optimal), an approximately 19% improvement"
+        },
+        {
+          "id": "d",
+          "text": "BagLearner's IS RMSE of 0.0026 (not zero) at leaf_size=1 shows that individual bootstrapped trees see different data subsets, so the average no longer perfectly fits the original training set"
+        },
+        {
+          "id": "e",
+          "text": "These results prove that bagging always eliminates the need to tune leaf_size, since BagLearner performs well regardless of the hyperparameter"
+        }
+      ],
+      "correctAnswers": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "explanation": "DTLearner at leaf_size=1 perfectly memorizes training data (IS RMSE=0) but generalizes poorly (OOS RMSE=0.0077). BagLearner reduces the IS-OOS gap from 0.0077 to 0.0027, confirming variance reduction. The best OOS RMSE improves from 0.0064 to 0.0052, about 19% better. BagLearner's non-zero IS RMSE occurs because bootstrapped bags contain different subsets, so averaging their predictions doesn't perfectly reconstruct the original data. However, bagging does NOT eliminate the need for tuning — leaf_size still matters (BagLearner at leaf_size=1 has OOS 0.0053 vs 0.0052 at optimal), it just reduces sensitivity."
     }
   ]
 }

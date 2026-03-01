@@ -37,6 +37,24 @@
         </div>
       </div>
 
+      <div class="card">
+        <h2>Question Type</h2>
+        <div class="radio-group">
+          <label class="radio-option">
+            <input type="radio" name="question-type" value="all" checked>
+            <span class="radio-label">All Types</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="question-type" value="multi-select">
+            <span class="radio-label">Multi-Select</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="question-type" value="scenario">
+            <span class="radio-label">Scenarios (True/False)</span>
+          </label>
+        </div>
+      </div>
+
       <div id="topic-selector" class="card hidden">
         <h2>Select Topics</h2>
         <div id="topic-checkboxes" class="checkbox-group">
@@ -69,8 +87,9 @@
       </div>
 
       <div class="card question-card">
+        <div id="scenario-text" class="scenario-text hidden"></div>
         <p id="question-text" class="question-text"></p>
-        <p class="select-hint">Select all that apply.</p>
+        <p id="select-hint" class="select-hint">Select all that apply.</p>
         <div id="options-container" class="options-list">
           <!-- Populated by JS -->
         </div>
@@ -99,6 +118,10 @@
 
       <div class="card">
         <h2>Score by Topic</h2>
+        <div class="score-legend">
+          <span class="legend-strict">Strict</span>
+          <span class="legend-options">Per-option</span>
+        </div>
         <div id="topic-scores" class="topic-scores-list">
           <!-- Populated by JS -->
         </div>

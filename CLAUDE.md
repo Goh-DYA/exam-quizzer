@@ -8,7 +8,7 @@ A zero-dependency, mobile-friendly multi-select quiz web app for ML4T (Machine L
 index.html              # Single-page app (3 screens: home, quiz, results)
 css/style.css           # Mobile-first responsive styles
 js/app.js               # Quiz engine, UI rendering, scoring
-js/questions.json       # 117-question bank (12 topics, 5 options each)
+js/questions.json       # 141-question bank (117 multi-select + 24 scenarios)
 resources/              # Source materials (gitignored, not deployed)
 ```
 

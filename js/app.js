@@ -6,6 +6,7 @@ const state = {
   submitted: [],
   currentIndex: 0,
   quizMode: null,
+  questionType: 'all',
   selectedTopics: [],
   shuffleEnabled: true,
   reviewMode: false
@@ -82,11 +83,18 @@ function setupEventListeners() {
 // === Quiz Flow ===
 function startQuiz() {
   const mode = document.querySelector('input[name="quiz-mode"]:checked').value;
+  const questionType = document.querySelector('input[name="question-type"]:checked').value;
   state.quizMode = mode;
+  state.questionType = questionType;
   state.shuffleEnabled = $('#shuffle-toggle').checked;
   state.reviewMode = false;
 
-  let questions = [];
+  // Start with all questions, then filter by type
+  let questions = [...state.allQuestions];
+
+  if (questionType !== 'all') {
+    questions = questions.filter(q => (q.type || 'multi-select') === questionType);
+  }
 
   if (mode === 'byTopic') {
     const selected = [...$$('.topic-cb:checked')].map(cb => cb.value);
@@ -95,9 +103,7 @@ function startQuiz() {
       return;
     }
     state.selectedTopics = selected;
-    questions = state.allQuestions.filter(q => selected.includes(q.topic));
-  } else {
-    questions = [...state.allQuestions];
+    questions = questions.filter(q => selected.includes(q.topic));
   }
 
   if (state.shuffleEnabled) {
@@ -133,8 +139,26 @@ function renderQuestion(index) {
   $('#progress-fill').style.width = `${((index + 1) / total) * 100}%`;
   $('#topic-label').textContent = topicMeta[q.topic] || q.topic;
 
+  // Scenario text (for scenario-type questions)
+  const scenarioEl = $('#scenario-text');
+  if (q.scenario) {
+    scenarioEl.textContent = q.scenario;
+    scenarioEl.classList.remove('hidden');
+  } else {
+    scenarioEl.textContent = '';
+    scenarioEl.classList.add('hidden');
+  }
+
   // Question text
   $('#question-text').textContent = q.question;
+
+  // Hint text (dynamic based on question type)
+  const hintEl = $('#select-hint');
+  if (q.type === 'scenario') {
+    hintEl.textContent = 'Select all TRUE statements.';
+  } else {
+    hintEl.textContent = 'Select all that apply.';
+  }
 
   // Options
   const container = $('#options-container');
@@ -191,14 +215,15 @@ function renderQuestion(index) {
     const result = gradeAnswer(index);
     const feedbackResult = $('#feedback-result');
 
+    const optionTally = `<span class="option-tally">${result.optionMarks}/${result.totalOptions} options</span>`;
     if (result.isCorrect) {
-      feedbackResult.textContent = 'Correct!';
+      feedbackResult.innerHTML = `Correct! ${optionTally}`;
       feedbackResult.className = 'feedback-result result-correct';
     } else if (result.hasPartial) {
-      feedbackResult.textContent = `Partial — ${result.correctCount}/${result.totalCorrect} correct answers selected`;
+      feedbackResult.innerHTML = `Partial — ${result.correctCount}/${result.totalCorrect} correct answers selected ${optionTally}`;
       feedbackResult.className = 'feedback-result result-partial';
     } else {
-      feedbackResult.textContent = 'Incorrect';
+      feedbackResult.innerHTML = `Incorrect ${optionTally}`;
       feedbackResult.className = 'feedback-result result-incorrect';
     }
 
@@ -288,19 +313,27 @@ function gradeAnswer(index) {
   const correctCount = [...selected].filter(s => correct.has(s)).length;
   const hasPartial = correctCount > 0 && !isCorrect;
 
-  return { isCorrect, hasPartial, correctCount, totalCorrect: correct.size };
+  // Per-option scoring: 1 mark per option if user's action matches correctness
+  let optionMarks = 0;
+  q.options.forEach(opt => {
+    if (selected.has(opt.id) === correct.has(opt.id)) optionMarks++;
+  });
+
+  return { isCorrect, hasPartial, correctCount, totalCorrect: correct.size, optionMarks, totalOptions: q.options.length };
 }
 
 // === Results ===
 function showResults() {
   let totalCorrect = 0;
+  let totalOptionMarks = 0;
+  let totalOptionsPossible = 0;
   const total = state.quizQuestions.length;
 
   // Per-topic scores
   const topicScores = {};
   state.quizQuestions.forEach((q, i) => {
     if (!topicScores[q.topic]) {
-      topicScores[q.topic] = { correct: 0, total: 0 };
+      topicScores[q.topic] = { correct: 0, total: 0, optionMarks: 0, optionsPossible: 0 };
     }
     topicScores[q.topic].total++;
     const result = gradeAnswer(i);
@@ -308,14 +341,22 @@ function showResults() {
       totalCorrect++;
       topicScores[q.topic].correct++;
     }
+    totalOptionMarks += result.optionMarks;
+    totalOptionsPossible += result.totalOptions;
+    topicScores[q.topic].optionMarks += result.optionMarks;
+    topicScores[q.topic].optionsPossible += result.totalOptions;
   });
 
   const pct = Math.round((totalCorrect / total) * 100);
+  const optionPct = Math.round((totalOptionMarks / totalOptionsPossible) * 100);
 
   // Overall score
   $('#overall-score').innerHTML = `
     <div class="score-number">${pct}%</div>
     <div class="score-detail">${totalCorrect} out of ${total} correct</div>
+    <div class="score-divider"></div>
+    <div class="score-number score-number-secondary">${optionPct}%</div>
+    <div class="score-detail">Option Accuracy — ${totalOptionMarks} out of ${totalOptionsPossible}</div>
   `;
 
   // Topic breakdown
@@ -324,13 +365,22 @@ function showResults() {
     .sort((a, b) => a[1].correct / a[1].total - b[1].correct / b[1].total)
     .map(([topicId, score]) => {
       const topicPct = score.total > 0 ? Math.round((score.correct / score.total) * 100) : 0;
+      const topicOptPct = score.optionsPossible > 0 ? Math.round((score.optionMarks / score.optionsPossible) * 100) : 0;
       return `
         <div class="topic-score-row">
           <span class="topic-score-name">${topicMeta[topicId] || topicId}</span>
           <div class="topic-score-right">
-            <span class="topic-score-value">${score.correct}/${score.total} (${topicPct}%)</span>
-            <div class="topic-score-bar">
-              <div class="topic-score-bar-fill" style="width: ${topicPct}%"></div>
+            <div class="topic-score-metrics">
+              <span class="topic-score-value">${score.correct}/${score.total} (${topicPct}%)</span>
+              <span class="topic-score-value topic-score-value-secondary">${score.optionMarks}/${score.optionsPossible} options (${topicOptPct}%)</span>
+            </div>
+            <div class="topic-score-bars">
+              <div class="topic-score-bar">
+                <div class="topic-score-bar-fill" style="width: ${topicPct}%"></div>
+              </div>
+              <div class="topic-score-bar">
+                <div class="topic-score-bar-fill topic-score-bar-fill-secondary" style="width: ${topicOptPct}%"></div>
+              </div>
             </div>
           </div>
         </div>

@@ -4,9 +4,10 @@ Multi-select quizzes for ML4T (Machine Learning for Trading) exam preparation.
 
 ## Features
 
-- **117 questions** across 12 topics covering the full ML4T syllabus
-- **Multi-select format** — each question has 5 options with 1–4 correct answers
+- **141 questions** across 12 topics covering the full ML4T syllabus
+- **Two question types** — Multi-select (117) and Scenario-based True/False (24)
 - **Quiz modes** — All Topics, Random 20, Random 40, or filter By Topic
+- **Question type filter** — All Types, Multi-Select only, or Scenarios only
 - **Instant feedback** — per-option color coding (correct / incorrect / missed) with explanations
 - **Results dashboard** — overall score + per-topic breakdown with review mode
 - **Mobile-friendly** — responsive design with touch-sized targets
@@ -32,20 +33,20 @@ Then open [http://localhost:8080](http://localhost:8080) in your browser.
 
 ## Topics Covered
 
-| Topic | Questions |
-|-------|-----------|
-| Stock Data & Pandas | 8 |
-| Portfolio Statistics & Sharpe Ratio | 9 |
-| Market Mechanics & Order Types | 10 |
-| Hedge Funds & Fund Types | 10 |
-| Company Valuation & CAPM | 12 |
-| Technical Analysis | 10 |
-| Regression (Linear, KNN) | 10 |
-| Decision Trees | 12 |
-| Ensemble Methods | 10 |
-| Overfitting & Bias-Variance | 8 |
-| ML in Finance | 8 |
-| Projects (Martingale, Learners) | 10 |
+| Topic | Multi-Select | Scenarios | Total |
+|-------|--------------|-----------|-------|
+| Stock Data & Pandas | 8 | 2 | 10 |
+| Portfolio Statistics & Sharpe Ratio | 9 | 2 | 11 |
+| Market Mechanics & Order Types | 10 | 2 | 12 |
+| Hedge Funds & Fund Types | 10 | 2 | 12 |
+| Company Valuation & CAPM | 12 | 2 | 14 |
+| Technical Analysis | 10 | 2 | 12 |
+| Regression (Linear, KNN) | 10 | 2 | 12 |
+| Decision Trees | 12 | 2 | 14 |
+| Ensemble Methods | 10 | 2 | 12 |
+| Overfitting & Bias-Variance | 8 | 2 | 10 |
+| ML in Finance | 8 | 2 | 10 |
+| Projects (Martingale, Learners) | 10 | 2 | 12 |
 
 ## Tech Stack
 
